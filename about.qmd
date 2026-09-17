@@ -1,0 +1,18 @@
+## About
+
+:::: {.columns}
+
+::: {.column width="34%"}
+![](images/Head_shot.png){.rounded fig-alt="Preston Sorenson" width=100%}
+:::
+
+::: {.column width="6%"}
+:::
+
+::: {.column width="60%"}
+I'm Preston Sorenson a soil scientist and quantitative analyst, and the founder of Krotovina Data Insights. I hold a Ph.D. in Soil Science and I am a Professional Agrologist (P.Ag.), with a research background in predictive soil mapping, soil carbon and nitrogen dynamics, and process-based biogeochemical modelling. My published work spans machine-learning soil mapping with remote sensing, soil spectroscopy, and tillage effects on carbon and my day-to-day tools are R, Python,DayCent, Google Earth Engine, and high-performance computing at landscape scale.
+
+Through Krotovina, I bring that same scientific rigour to organizations working in carbon markets, climate risk, and agricultural sustainability: defensible, reproducible analysis with uncertainty treated honestly, whether the question is a soil carbon baseline, an MMRV workflow, or making sense of a complex environmental dataset.
+:::
+
+::::

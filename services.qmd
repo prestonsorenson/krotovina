@@ -1,0 +1,40 @@
+
+---
+title: "Services"
+---
+
+Krotovina Data Insights provides quantitative soil, carbon, and
+environmental analysis for organizations working in carbon markets, climate risk, and agricultural sustainability. Every project is built on reproducible, defensible methods and transparent treatment of uncertainty.
+
+## Predictive Soil Mapping
+
+Spatial prediction of soil properties: organic carbon, texture,
+pH and salinity across fields, regions, or entire landscapes.
+By combining field observations with terrain, climate, and remote
+sensing covariates in machine-learning frameworks, I produce
+continuous maps with explicit uncertainty at the resolution your
+project needs. Well suited to establishing soil carbon baselines,
+delineating management zones, and extending sparse sampling to full spatial coverage.
+
+## Remote Sensing Data Analysis
+
+Analysis of satellite and airborne imagery at scale using Google
+Earth Engine and open geospatial tooling. Applications include
+vegetation productivity and biomass estimation, land-cover and
+land-use change detection, and construction of long time series from the MODIS, Landsat, and Sentinel archives. This turns vast imagery collections into the specific indicators a project needs such as productivity trends, conversion events, and calibrated model inputs.
+
+## Biogeochemical Process Modelling
+
+Simulation of soil organic carbon dynamics and greenhouse gas fluxes using process-based models (DayCent/CENTURY) calibrated to local conditions. Bayesian calibration quantifies parameter uncertainty and propagates it through to predictions, so scenario projections come with credible bounds rather than single-point estimates. Supports additionality assessment, management-scenario comparison, and forward-looking projections of carbon outcomes.
+
+## Carbon Intensity and MMRV
+
+Measurement, monitoring, reporting, and verification support for
+carbon and biofuel projects. I build quantification workflows
+that align with recognized protocols, combine measured and modeled data defensibly, and carry uncertainty through to reported values producing credit-grade, audit-ready estimates. Applicable to soil carbon crediting, avoided-conversion accounting, and carbon-intensity scoring for agricultural systems.
+
+## Agricultural and Environmental Scientific Data Analysis
+
+End-to-end analysis of complex agricultural and environmental
+datasets, from experimental design through to publication or
+regulator-ready results. Services span statistical modeling (mixed models, Bayesian inference, spatial statistics), reproducible R and Python pipelines, and processing of large datasets on high-performance computing infrastructure. For teams that have the data but need rigorous, transparent analysis they can stand behind.

@@ -1,0 +1,23 @@
+project:
+  type: website
+  resources:
+    - CNAME
+
+website:
+  title: "Krotovina Data Insights"
+  site-url: https://yourdomain.com
+  navbar:
+    right:
+      - text: Services
+        href: services.qmd
+      - text: About
+        href: about.qmd
+      - text: Contact
+        href: contact.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    email-obfuscation: javascript

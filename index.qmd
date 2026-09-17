@@ -1,0 +1,12 @@
+---
+title: ""
+page-layout: full
+toc: false
+---
+
+::: {.text-center style="margin-top: 4rem; margin-bottom: 3rem;"}
+![](images/krotovina_logo_v12.svg){fig-alt="Krotovina Data Insights" width=640}
+
+Quantitative soil, carbon, and environmental analysis for carbon
+markets, climate risk, and agricultural sustainability.
+:::
