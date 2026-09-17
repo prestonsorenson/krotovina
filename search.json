@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Krotovina Data Insights",
+    "section": "",
+    "text": "I’m Preston Sorenson a soil scientist and quantitative analyst, and the founder of Krotovina Data Insights. I hold a Ph.D. in Soil Science and I am a Professional Agrologist (P.Ag.), with a research background in predictive soil mapping, soil carbon and nitrogen dynamics, and process-based biogeochemical modelling. My published work spans machine-learning soil mapping with remote sensing, soil spectroscopy, and tillage effects on carbon and my day-to-day tools are R, Python,DayCent, Google Earth Engine, and high-performance computing at landscape scale.\nThrough Krotovina, I bring that same scientific rigour to organizations working in carbon markets, climate risk, and agricultural sustainability: defensible, reproducible analysis with uncertainty treated honestly, whether the question is a soil carbon baseline, an MMRV workflow, or making sense of a complex environmental dataset."
+  },
+  {
+    "objectID": "about.html#about",
+    "href": "about.html#about",
+    "title": "Krotovina Data Insights",
+    "section": "",
+    "text": "I’m Preston Sorenson a soil scientist and quantitative analyst, and the founder of Krotovina Data Insights. I hold a Ph.D. in Soil Science and I am a Professional Agrologist (P.Ag.), with a research background in predictive soil mapping, soil carbon and nitrogen dynamics, and process-based biogeochemical modelling. My published work spans machine-learning soil mapping with remote sensing, soil spectroscopy, and tillage effects on carbon and my day-to-day tools are R, Python,DayCent, Google Earth Engine, and high-performance computing at landscape scale.\nThrough Krotovina, I bring that same scientific rigour to organizations working in carbon markets, climate risk, and agricultural sustainability: defensible, reproducible analysis with uncertainty treated honestly, whether the question is a soil carbon baseline, an MMRV workflow, or making sense of a complex environmental dataset."
+  },
+  {
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "I work with organizations in carbon markets, climate risk, and agricultural sustainability that need rigorous, defensible quantitative analysis. If you have a project in mind - or just want to talk through whether it’s a fit - I’d be glad to hear from you.\nWhen you reach out, a short description of your project, timeline, and the data you’re working with helps me give you a useful first response.\nEmail: Preston Sorenson (psorenson at krotovina dot ca)\nLinkedIn: preston-sorenson\nGoogle Scholar: Publications\nGitHub: prestonsorenson\nBased in Kitchener, Ontario. Available for remote engagements with clients across Canada and internationally."
+  },
+  {
+    "objectID": "services.html",
+    "href": "services.html",
+    "title": "Services",
+    "section": "",
+    "text": "Krotovina Data Insights provides quantitative soil, carbon, and environmental analysis for organizations working in carbon markets, climate risk, and agricultural sustainability. Every project is built on reproducible, defensible methods and transparent treatment of uncertainty."
+  },
+  {
+    "objectID": "services.html#predictive-soil-mapping",
+    "href": "services.html#predictive-soil-mapping",
+    "title": "Services",
+    "section": "Predictive Soil Mapping",
+    "text": "Predictive Soil Mapping\nSpatial prediction of soil properties: organic carbon, texture, pH and salinity across fields, regions, or entire landscapes. By combining field observations with terrain, climate, and remote sensing covariates in machine-learning frameworks, I produce continuous maps with explicit uncertainty at the resolution your project needs. Well suited to establishing soil carbon baselines, delineating management zones, and extending sparse sampling to full spatial coverage."
+  },
+  {
+    "objectID": "services.html#remote-sensing-data-analysis",
+    "href": "services.html#remote-sensing-data-analysis",
+    "title": "Services",
+    "section": "Remote Sensing Data Analysis",
+    "text": "Remote Sensing Data Analysis\nAnalysis of satellite and airborne imagery at scale using Google Earth Engine and open geospatial tooling. Applications include vegetation productivity and biomass estimation, land-cover and land-use change detection, and construction of long time series from the MODIS, Landsat, and Sentinel archives. This turns vast imagery collections into the specific indicators a project needs such as productivity trends, conversion events, and calibrated model inputs."
+  },
+  {
+    "objectID": "services.html#biogeochemical-process-modelling",
+    "href": "services.html#biogeochemical-process-modelling",
+    "title": "Services",
+    "section": "Biogeochemical Process Modelling",
+    "text": "Biogeochemical Process Modelling\nSimulation of soil organic carbon dynamics and greenhouse gas fluxes using process-based models (DayCent/CENTURY) calibrated to local conditions. Bayesian calibration quantifies parameter uncertainty and propagates it through to predictions, so scenario projections come with credible bounds rather than single-point estimates. Supports additionality assessment, management-scenario comparison, and forward-looking projections of carbon outcomes."
+  },
+  {
+    "objectID": "services.html#carbon-intensity-and-mmrv",
+    "href": "services.html#carbon-intensity-and-mmrv",
+    "title": "Services",
+    "section": "Carbon Intensity and MMRV",
+    "text": "Carbon Intensity and MMRV\nMeasurement, monitoring, reporting, and verification support for carbon and biofuel projects. I build quantification workflows that align with recognized protocols, combine measured and modeled data defensibly, and carry uncertainty through to reported values producing credit-grade, audit-ready estimates. Applicable to soil carbon crediting, avoided-conversion accounting, and carbon-intensity scoring for agricultural systems."
+  },
+  {
+    "objectID": "services.html#agricultural-and-environmental-scientific-data-analysis",
+    "href": "services.html#agricultural-and-environmental-scientific-data-analysis",
+    "title": "Services",
+    "section": "Agricultural and Environmental Scientific Data Analysis",
+    "text": "Agricultural and Environmental Scientific Data Analysis\nEnd-to-end analysis of complex agricultural and environmental datasets, from experimental design through to publication or regulator-ready results. Services span statistical modeling (mixed models, Bayesian inference, spatial statistics), reproducible R and Python pipelines, and processing of large datasets on high-performance computing infrastructure. For teams that have the data but need rigorous, transparent analysis they can stand behind."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Krotovina Data Insights",
+    "section": "",
+    "text": "Quantitative soil, carbon, and environmental analysis for carbon markets, climate risk, and agricultural sustainability."
+  }
+]
