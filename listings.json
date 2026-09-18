@@ -1,0 +1,16 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/canola-climate-scenarios/canola-climate-post.html",
+      "/posts/soc-crop-yields/index.html"
+    ]
+  },
+  {
+    "listing": "/index.html",
+    "items": [
+      "/posts/canola-climate-scenarios/canola-climate-post.html",
+      "/posts/soc-crop-yields/index.html"
+    ]
+  }
+]

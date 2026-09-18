@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Krotovina Data Insights</title>
+<link>https://yourdomain.com/blog.html</link>
+<atom:link href="https://yourdomain.com/blog.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.10.18</generator>
+<lastBuildDate>Sat, 19 Sep 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan</title>
+  <dc:creator>Preston Sorenson</dc:creator>
+  <link>https://yourdomain.com/posts/canola-climate-scenarios/canola-climate-post.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Canola is Saskatchewan’s largest crop and one of the most valuable in the country. Roughly 22 million seeded acres in 2024 and a $43.7 billion footprint in the Canadian economy. It also has a well-known weakness to heat. Canola flowers are sensitive to hot days, and yields fall off sharply when temperatures spike during the critical July flowering window. That makes it a natural test case for a question every climate-exposed agribusiness eventually has to ask. Not just <em>will</em> the climate change, but what does it do to the thing I care about, how much, and where?</p>
+<p>I built a model to answer that for canola across the whole province, out to the end of the century.</p>
+<section id="building-a-forward-looking-yield-model" class="level2">
+<h2 class="anchored" data-anchor-id="building-a-forward-looking-yield-model">Building a forward-looking yield model</h2>
+<p>The approach pairs two things I work with often: climate projections and predictive soil maps. I trained a machine-learning model (a random forest) on two decades of crop-insurance yield records, using both soil properties (organic carbon, clay, and sand from earlier mapping work) and the climate variables canola responds to: July maximum and minimum temperature, the number of days above 30°C, the number of nights above 16°C, and annual precipitation.</p>
+<p>Then I ran that model forward using 26 downscaled global climate models, across three emissions pathways: low (SSP1-2.6), moderate (SSP2-4.5), and high (SSP5-8.5). For every quarter section in the province, from 2025 to 2100. Using 26 models rather than one is the point: the spread between them <em>is</em> the uncertainty, and averaging across them gives a more honest central estimate than any single model could. The model validated reasonably against held-out data (R-squared of 0.51, RMSE of 429 kg/ha), in line with other Canadian canola yield models.</p>
+</section>
+<section id="temperature-is-the-lever" class="level2">
+<h2 class="anchored" data-anchor-id="temperature-is-the-lever">Temperature is the lever</h2>
+<p>The clearest signal was that canola yields track temperature more than precipitation. Modelled yields rose with temperature up to a point and then decreased once mean daily July maximum temperatures passed about 28.5°C. That threshold matters because it is exactly the range future summers push into and it means the yield response to warming is not gentle and linear but flips from modest to damaging once the heat crosses that line.</p>
+</section>
+<section id="how-bad-and-where" class="level2">
+<h2 class="anchored" data-anchor-id="how-bad-and-where">How bad, and where</h2>
+<p>This is the figure that pulls it together: the relative change in canola yield across all three scenarios (rows) and three future periods (columns), all measured against the near-term low-emissions baseline.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/canola-climate-scenarios/canola_climate_scenarios.png" class="img-fluid figure-img"></p>
+<figcaption>Relative change in modelled canola yield across three emissions scenarios (rows) and three future periods (columns), Saskatchewan. Blue is near baseline; orange to red are progressively larger losses. From Sorenson et al.&nbsp;(2025), <em>FACETS</em>, used under CC BY.</figcaption>
+</figure>
+</div>
+<p>Read it top-left to bottom-right and the risk gradient is unmistakable. Under the low-emissions pathway (top row), yields stay close to baseline through 2100. Under the high-emissions pathway (bottom row), the map turns progressively red, with the most severe losses concentrated in the late-century, high-emissions corner.</p>
+<p>The province-wide median declines in Canola yield, long term, came out to:</p>
+<ul>
+<li><strong>Low emissions (SSP1-2.6):</strong> about -39 kg/ha (2%) - essentially stable</li>
+<li><strong>Moderate emissions (SSP2-4.5):</strong> about -137 kg/ha (6%)</li>
+<li><strong>High emissions (SSP5-8.5):</strong> about -349 kg/ha (15%)</li>
+</ul>
+<p>Two findings matter as much as the headline averages. First, <strong>the losses are not spread evenly.</strong> The largest declines fall in the Black soil zone. Today’s most productive canola producing region because those higher-yielding regions currently see little heat stress and have the most to lose as summers warm. Second, <strong>the losses arrive sooner than end-of-century.</strong> Under the moderate and high pathways, meaningful declines show up by the medium term (2050-2075), not just at 2100.</p>
+<p>I’d flag one honest caveat: because of how the model and the insurance-claim yield data behave at the extremes, these are likely <em>conservative</em> estimates. Real losses in the hottest areas could run higher than shown.</p>
+</section>
+<section id="why-this-kind-of-analysis-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-kind-of-analysis-matters">Why this kind of analysis matters</h2>
+<p>For anyone assessing physical climate risk, lenders, insurers, agribusiness, or producers planning decades ahead, the useful output is not a single number but a spatial, scenario-dependent picture: how exposure changes by location, by emissions pathway, and over time. That is what lets you separate a manageable risk from a structural one, and target adaptations, such as heat-tolerant varieties and earlier seeding to move flowering ahead of peak July heat, where it will matter most.</p>
+<p>It also shows what pairing climate ensembles with predictive soil mapping can do: turn broad warming projections into decision-grade, field-scale risk maps for a specific crop and a specific place.</p>
+<hr>
+<p><em>This article summarizes: Sorenson, P. T., Mood, B., &amp; Shirtliffe, S. (2025). Future canola yields under different climate scenarios in Saskatchewan, Canada. FACETS. <a href="https://doi.org/10.1139/facets-2025-0121">https://doi.org/10.1139/facets-2025-0121</a></em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>climate risk</category>
+  <category>canola</category>
+  <category>crop yield</category>
+  <category>climate scenarios</category>
+  <category>predictive modelling</category>
+  <guid>https://yourdomain.com/posts/canola-climate-scenarios/canola-climate-post.html</guid>
+  <pubDate>Sat, 19 Sep 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://yourdomain.com/posts/canola-climate-scenarios/canola_climate_scenarios.png" medium="image" type="image/png" height="126" width="144"/>
+</item>
+<item>
+  <title>What Soil Organic Carbon Is Worth to Prairie Crop Yields</title>
+  <dc:creator>Preston Sorenson</dc:creator>
+  <link>https://yourdomain.com/posts/soc-crop-yields/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Soil organic carbon (SOC) is usually talked about as a climate lever: increasing SOC as a technique to mitigate climate change. That is real, and it is why soil carbon sits at the centre of so many agricultural carbon programs. But for the person actually farming the land, there is a more immediate question does more soil carbon grow more crop? And if so, how much more, and where does it matter most?</p>
+<p>I set out to answer that at provincial scale for the four crops that dominate Saskatchewan: hard red spring wheat, barley, canola, and field peas.</p>
+<section id="mapping-the-carbon-first" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-the-carbon-first">Mapping the carbon first</h2>
+<p>You cannot study something you cannot measure everywhere, so the first step was a wall-to-wall map of topsoil organic carbon. I combined 5014 historical soil samples with satellite imagery, climate data, and terrain information, and trained a machine-learning model (a random forest) to predict SOC across the whole agricultural region at 250 m resolution. The result is the map below.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/soc-crop-yields/soc_map_saskatchewan.png" class="img-fluid figure-img"></p>
+<figcaption>Predicted topsoil organic carbon across Saskatchewan’s agricultural region. From Sorenson et al.&nbsp;(2024), <em>Agronomy Journal</em>, used under CC BY.</figcaption>
+</figure>
+</div>
+<p>The model held up against independent test data (R-squared of 0.48, concordance correlation of 0.67). Solid performance for regional soil mapping built largely from legacy samples and open satellite archives.</p>
+</section>
+<section id="linking-carbon-to-yield" class="level2">
+<h2 class="anchored" data-anchor-id="linking-carbon-to-yield">Linking carbon to yield</h2>
+<p>With the map in hand, I paired it against crop insurance yield records - between 100,000 and 200,000 records per crop - and used a mixed- effects model that normalized both carbon and yield within each rural municipality. That normalization is the important part: it strips out the broad climate gradients that drive both SOC and yield in the same direction, so what remains is much closer to the effect of carbon itself rather than the effect of a wetter or cooler region.</p>
+<p>The relationship was clear and positive for all four crops. A one percentage point increase in SOC was associated with, on average:</p>
+<ul>
+<li><strong>Wheat:</strong> +263 kg/ha (about 7.9%)</li>
+<li><strong>Barley:</strong> +293 kg/ha (about 8.2%)</li>
+<li><strong>Canola:</strong> +133 kg/ha (about 5.6%)</li>
+<li><strong>Field peas:</strong> +135 kg/ha (about 5.5%)</li>
+</ul>
+<p>At the commodity prices used in the study, that works out to roughly $4,000 to $5,200 in additional revenue per quarter section for every one-point gain in SOC, depending on the crop. The cereals responded most strongly; peas the least, which fits their biology, as a legume fixing its own nitrogen, peas are less dependent on the nitrogen that richer soils supply.</p>
+</section>
+<section id="where-it-pays-the-most" class="level2">
+<h2 class="anchored" data-anchor-id="where-it-pays-the-most">Where it pays the most</h2>
+<p>The headline averages hide the most useful finding for anyone deciding where to invest in soil health: the returns are largest on the poorest soils. Yield response to increasing carbon contents was strongest in areas with lower starting SOC (roughly the 2 to 2.5% range) and tapered off as soils got richer, with the response flattening above SOC contents of about 3%. In other words, the same tonne of carbon buys more yield on a depleted soil than on an already-carbon-rich one.</p>
+</section>
+<section id="why-this-matters-beyond-the-farm-gate" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-matters-beyond-the-farm-gate">Why this matters beyond the farm gate</h2>
+<p>The main takeaway from this work is that while much of the conversation on practices that build soil carbon (reduced tillage, cover cropping, better rotations) have been focused on sequestration, there is a real yield benefit from increasing SOC.</p>
+<hr>
+<p><em>This article summarizes: Sorenson, P. T., Shirtliffe, S., &amp; Bedard-Haughn, A. K. (2024). Examining the effect of soil organic carbon on major Canadian Prairie crop yields with predictive soil mapping. Agronomy Journal. <a href="https://doi.org/10.1002/agj2.21704">https://doi.org/10.1002/agj2.21704</a></em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>soil carbon</category>
+  <category>predictive soil mapping</category>
+  <category>crop yield</category>
+  <category>remote sensing</category>
+  <guid>https://yourdomain.com/posts/soc-crop-yields/</guid>
+  <pubDate>Fri, 18 Sep 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://yourdomain.com/posts/soc-crop-yields/soc_map_saskatchewan.png" medium="image" type="image/png" height="133" width="144"/>
+</item>
+</channel>
+</rss>

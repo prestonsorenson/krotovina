@@ -1,24 +1,59 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Krotovina Data Insights",
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Articles",
     "section": "",
-    "text": "I’m Preston Sorenson a soil scientist and quantitative analyst, and the founder of Krotovina Data Insights. I hold a Ph.D. in Soil Science and I am a Professional Agrologist (P.Ag.), with a research background in predictive soil mapping, soil carbon and nitrogen dynamics, and process-based biogeochemical modelling. My published work spans machine-learning soil mapping with remote sensing, soil spectroscopy, and tillage effects on carbon and my day-to-day tools are R, Python,DayCent, Google Earth Engine, and high-performance computing at landscape scale.\nThrough Krotovina, I bring that same scientific rigour to organizations working in carbon markets, climate risk, and agricultural sustainability: defensible, reproducible analysis with uncertainty treated honestly, whether the question is a soil carbon baseline, an MMRV workflow, or making sense of a complex environmental dataset."
+    "text": "Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan\n\n\n\nclimate risk\n\ncanola\n\ncrop yield\n\nclimate scenarios\n\npredictive modelling\n\n\n\nCombining 26 climate models with predictive soil mapping to forecast Saskatchewan canola yields to 2100.\n\n\n\n\n\nSep 19, 2026\n\n\nPreston Sorenson\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Soil Organic Carbon Is Worth to Prairie Crop Yields\n\n\n\nsoil carbon\n\npredictive soil mapping\n\ncrop yield\n\nremote sensing\n\n\n\nMapping soil organic carbon across Saskatchewan and linking it to millions of yield records shows what a one percent gain in SOC is worth to farmers and where it has the most benefit.\n\n\n\n\n\nSep 18, 2026\n\n\nPreston Sorenson\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "about.html#about",
-    "href": "about.html#about",
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "Krotovina Data Insights",
     "section": "",
-    "text": "I’m Preston Sorenson a soil scientist and quantitative analyst, and the founder of Krotovina Data Insights. I hold a Ph.D. in Soil Science and I am a Professional Agrologist (P.Ag.), with a research background in predictive soil mapping, soil carbon and nitrogen dynamics, and process-based biogeochemical modelling. My published work spans machine-learning soil mapping with remote sensing, soil spectroscopy, and tillage effects on carbon and my day-to-day tools are R, Python,DayCent, Google Earth Engine, and high-performance computing at landscape scale.\nThrough Krotovina, I bring that same scientific rigour to organizations working in carbon markets, climate risk, and agricultural sustainability: defensible, reproducible analysis with uncertainty treated honestly, whether the question is a soil carbon baseline, an MMRV workflow, or making sense of a complex environmental dataset."
+    "text": "Quantitative soil, carbon, and environmental analysis for carbon markets, climate risk, and agricultural sustainability."
   },
   {
-    "objectID": "contact.html",
-    "href": "contact.html",
-    "title": "Contact",
+    "objectID": "index.html#recent-articles",
+    "href": "index.html#recent-articles",
+    "title": "Krotovina Data Insights",
+    "section": "Recent articles",
+    "text": "Recent articles\n\n\n\n\n\nCanola Yields in a Warming Climate: A Scenario Map for Saskatchewan\n\n\nCombining 26 climate models with predictive soil mapping to forecast Saskatchewan canola yields to 2100.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\nWhat Soil Organic Carbon Is Worth to Prairie Crop Yields\n\n\nMapping soil organic carbon across Saskatchewan and linking it to millions of yield records shows what a one percent gain in SOC is worth to farmers and where it has the most benefit.\n\n\n\n\n\nSep 18, 2026\n\n\n\n\n\nNo matching items\n\nSee all articles →"
+  },
+  {
+    "objectID": "posts/soc-crop-yields/index.html",
+    "href": "posts/soc-crop-yields/index.html",
+    "title": "What Soil Organic Carbon Is Worth to Prairie Crop Yields",
     "section": "",
-    "text": "I work with organizations in carbon markets, climate risk, and agricultural sustainability that need rigorous, defensible quantitative analysis. If you have a project in mind - or just want to talk through whether it’s a fit - I’d be glad to hear from you.\nWhen you reach out, a short description of your project, timeline, and the data you’re working with helps me give you a useful first response.\nEmail: Preston Sorenson (psorenson at krotovina dot ca)\nLinkedIn: preston-sorenson\nGoogle Scholar: Publications\nGitHub: prestonsorenson\nBased in Kitchener, Ontario. Available for projects with clients across Canada and internationally."
+    "text": "Soil organic carbon (SOC) is usually talked about as a climate lever: increasing SOC as a technique to mitigate climate change. That is real, and it is why soil carbon sits at the centre of so many agricultural carbon programs. But for the person actually farming the land, there is a more immediate question does more soil carbon grow more crop? And if so, how much more, and where does it matter most?\nI set out to answer that at provincial scale for the four crops that dominate Saskatchewan: hard red spring wheat, barley, canola, and field peas."
+  },
+  {
+    "objectID": "posts/soc-crop-yields/index.html#mapping-the-carbon-first",
+    "href": "posts/soc-crop-yields/index.html#mapping-the-carbon-first",
+    "title": "What Soil Organic Carbon Is Worth to Prairie Crop Yields",
+    "section": "Mapping the carbon first",
+    "text": "Mapping the carbon first\nYou cannot study something you cannot measure everywhere, so the first step was a wall-to-wall map of topsoil organic carbon. I combined 5014 historical soil samples with satellite imagery, climate data, and terrain information, and trained a machine-learning model (a random forest) to predict SOC across the whole agricultural region at 250 m resolution. The result is the map below.\n\n\n\nPredicted topsoil organic carbon across Saskatchewan’s agricultural region. From Sorenson et al. (2024), Agronomy Journal, used under CC BY.\n\n\nThe model held up against independent test data (R-squared of 0.48, concordance correlation of 0.67). Solid performance for regional soil mapping built largely from legacy samples and open satellite archives."
+  },
+  {
+    "objectID": "posts/soc-crop-yields/index.html#linking-carbon-to-yield",
+    "href": "posts/soc-crop-yields/index.html#linking-carbon-to-yield",
+    "title": "What Soil Organic Carbon Is Worth to Prairie Crop Yields",
+    "section": "Linking carbon to yield",
+    "text": "Linking carbon to yield\nWith the map in hand, I paired it against crop insurance yield records - between 100,000 and 200,000 records per crop - and used a mixed- effects model that normalized both carbon and yield within each rural municipality. That normalization is the important part: it strips out the broad climate gradients that drive both SOC and yield in the same direction, so what remains is much closer to the effect of carbon itself rather than the effect of a wetter or cooler region.\nThe relationship was clear and positive for all four crops. A one percentage point increase in SOC was associated with, on average:\n\nWheat: +263 kg/ha (about 7.9%)\nBarley: +293 kg/ha (about 8.2%)\nCanola: +133 kg/ha (about 5.6%)\nField peas: +135 kg/ha (about 5.5%)\n\nAt the commodity prices used in the study, that works out to roughly $4,000 to $5,200 in additional revenue per quarter section for every one-point gain in SOC, depending on the crop. The cereals responded most strongly; peas the least, which fits their biology, as a legume fixing its own nitrogen, peas are less dependent on the nitrogen that richer soils supply."
+  },
+  {
+    "objectID": "posts/soc-crop-yields/index.html#where-it-pays-the-most",
+    "href": "posts/soc-crop-yields/index.html#where-it-pays-the-most",
+    "title": "What Soil Organic Carbon Is Worth to Prairie Crop Yields",
+    "section": "Where it pays the most",
+    "text": "Where it pays the most\nThe headline averages hide the most useful finding for anyone deciding where to invest in soil health: the returns are largest on the poorest soils. Yield response to increasing carbon contents was strongest in areas with lower starting SOC (roughly the 2 to 2.5% range) and tapered off as soils got richer, with the response flattening above SOC contents of about 3%. In other words, the same tonne of carbon buys more yield on a depleted soil than on an already-carbon-rich one."
+  },
+  {
+    "objectID": "posts/soc-crop-yields/index.html#why-this-matters-beyond-the-farm-gate",
+    "href": "posts/soc-crop-yields/index.html#why-this-matters-beyond-the-farm-gate",
+    "title": "What Soil Organic Carbon Is Worth to Prairie Crop Yields",
+    "section": "Why this matters beyond the farm gate",
+    "text": "Why this matters beyond the farm gate\nThe main takeaway from this work is that while much of the conversation on practices that build soil carbon (reduced tillage, cover cropping, better rotations) have been focused on sequestration, there is a real yield benefit from increasing SOC.\n\nThis article summarizes: Sorenson, P. T., Shirtliffe, S., & Bedard-Haughn, A. K. (2024). Examining the effect of soil organic carbon on major Canadian Prairie crop yields with predictive soil mapping. Agronomy Journal. https://doi.org/10.1002/agj2.21704"
   },
   {
     "objectID": "services.html",
@@ -63,10 +98,59 @@
     "text": "Agricultural and Environmental Scientific Data Analysis\nEnd-to-end analysis of complex agricultural and environmental datasets, from experimental design through to publication or regulator-ready results. Services span statistical modeling (mixed models, Bayesian inference, spatial statistics), reproducible R and Python pipelines, and processing of large datasets on high-performance computing infrastructure. For teams that have the data but need rigorous, transparent analysis they can stand behind."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "contact.html",
+    "href": "contact.html",
+    "title": "Contact",
+    "section": "",
+    "text": "I work with organizations in carbon markets, climate risk, and agricultural sustainability that need rigorous, defensible quantitative analysis. If you have a project in mind - or just want to talk through whether it’s a fit - I’d be glad to hear from you.\nWhen you reach out, a short description of your project, timeline, and the data you’re working with helps me give you a useful first response.\nEmail: Preston Sorenson (psorenson at krotovina dot ca)\nLinkedIn: preston-sorenson\nGoogle Scholar: Publications\nGitHub: prestonsorenson\nBased in Kitchener, Ontario. Available for projects with clients across Canada and internationally."
+  },
+  {
+    "objectID": "posts/canola-climate-scenarios/canola-climate-post.html",
+    "href": "posts/canola-climate-scenarios/canola-climate-post.html",
+    "title": "Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan",
+    "section": "",
+    "text": "Canola is Saskatchewan’s largest crop and one of the most valuable in the country. Roughly 22 million seeded acres in 2024 and a $43.7 billion footprint in the Canadian economy. It also has a well-known weakness to heat. Canola flowers are sensitive to hot days, and yields fall off sharply when temperatures spike during the critical July flowering window. That makes it a natural test case for a question every climate-exposed agribusiness eventually has to ask. Not just will the climate change, but what does it do to the thing I care about, how much, and where?\nI built a model to answer that for canola across the whole province, out to the end of the century."
+  },
+  {
+    "objectID": "posts/canola-climate-scenarios/canola-climate-post.html#building-a-forward-looking-yield-model",
+    "href": "posts/canola-climate-scenarios/canola-climate-post.html#building-a-forward-looking-yield-model",
+    "title": "Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan",
+    "section": "Building a forward-looking yield model",
+    "text": "Building a forward-looking yield model\nThe approach pairs two things I work with often: climate projections and predictive soil maps. I trained a machine-learning model (a random forest) on two decades of crop-insurance yield records, using both soil properties (organic carbon, clay, and sand from earlier mapping work) and the climate variables canola responds to: July maximum and minimum temperature, the number of days above 30°C, the number of nights above 16°C, and annual precipitation.\nThen I ran that model forward using 26 downscaled global climate models, across three emissions pathways: low (SSP1-2.6), moderate (SSP2-4.5), and high (SSP5-8.5). For every quarter section in the province, from 2025 to 2100. Using 26 models rather than one is the point: the spread between them is the uncertainty, and averaging across them gives a more honest central estimate than any single model could. The model validated reasonably against held-out data (R-squared of 0.51, RMSE of 429 kg/ha), in line with other Canadian canola yield models."
+  },
+  {
+    "objectID": "posts/canola-climate-scenarios/canola-climate-post.html#temperature-is-the-lever",
+    "href": "posts/canola-climate-scenarios/canola-climate-post.html#temperature-is-the-lever",
+    "title": "Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan",
+    "section": "Temperature is the lever",
+    "text": "Temperature is the lever\nThe clearest signal was that canola yields track temperature more than precipitation. Modelled yields rose with temperature up to a point and then decreased once mean daily July maximum temperatures passed about 28.5°C. That threshold matters because it is exactly the range future summers push into and it means the yield response to warming is not gentle and linear but flips from modest to damaging once the heat crosses that line."
+  },
+  {
+    "objectID": "posts/canola-climate-scenarios/canola-climate-post.html#how-bad-and-where",
+    "href": "posts/canola-climate-scenarios/canola-climate-post.html#how-bad-and-where",
+    "title": "Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan",
+    "section": "How bad, and where",
+    "text": "How bad, and where\nThis is the figure that pulls it together: the relative change in canola yield across all three scenarios (rows) and three future periods (columns), all measured against the near-term low-emissions baseline.\n\n\n\nRelative change in modelled canola yield across three emissions scenarios (rows) and three future periods (columns), Saskatchewan. Blue is near baseline; orange to red are progressively larger losses. From Sorenson et al. (2025), FACETS, used under CC BY.\n\n\nRead it top-left to bottom-right and the risk gradient is unmistakable. Under the low-emissions pathway (top row), yields stay close to baseline through 2100. Under the high-emissions pathway (bottom row), the map turns progressively red, with the most severe losses concentrated in the late-century, high-emissions corner.\nThe province-wide median declines in Canola yield, long term, came out to:\n\nLow emissions (SSP1-2.6): about -39 kg/ha (2%) - essentially stable\nModerate emissions (SSP2-4.5): about -137 kg/ha (6%)\nHigh emissions (SSP5-8.5): about -349 kg/ha (15%)\n\nTwo findings matter as much as the headline averages. First, the losses are not spread evenly. The largest declines fall in the Black soil zone. Today’s most productive canola producing region because those higher-yielding regions currently see little heat stress and have the most to lose as summers warm. Second, the losses arrive sooner than end-of-century. Under the moderate and high pathways, meaningful declines show up by the medium term (2050-2075), not just at 2100.\nI’d flag one honest caveat: because of how the model and the insurance-claim yield data behave at the extremes, these are likely conservative estimates. Real losses in the hottest areas could run higher than shown."
+  },
+  {
+    "objectID": "posts/canola-climate-scenarios/canola-climate-post.html#why-this-kind-of-analysis-matters",
+    "href": "posts/canola-climate-scenarios/canola-climate-post.html#why-this-kind-of-analysis-matters",
+    "title": "Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan",
+    "section": "Why this kind of analysis matters",
+    "text": "Why this kind of analysis matters\nFor anyone assessing physical climate risk, lenders, insurers, agribusiness, or producers planning decades ahead, the useful output is not a single number but a spatial, scenario-dependent picture: how exposure changes by location, by emissions pathway, and over time. That is what lets you separate a manageable risk from a structural one, and target adaptations, such as heat-tolerant varieties and earlier seeding to move flowering ahead of peak July heat, where it will matter most.\nIt also shows what pairing climate ensembles with predictive soil mapping can do: turn broad warming projections into decision-grade, field-scale risk maps for a specific crop and a specific place.\n\nThis article summarizes: Sorenson, P. T., Mood, B., & Shirtliffe, S. (2025). Future canola yields under different climate scenarios in Saskatchewan, Canada. FACETS. https://doi.org/10.1139/facets-2025-0121"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
     "title": "Krotovina Data Insights",
     "section": "",
-    "text": "Quantitative soil, carbon, and environmental analysis for carbon markets, climate risk, and agricultural sustainability."
+    "text": "I’m Preston Sorenson a soil scientist and quantitative analyst, and the founder of Krotovina Data Insights. I hold a Ph.D. in Soil Science and I am a Professional Agrologist (P.Ag.), with a research background in predictive soil mapping, soil carbon and nitrogen dynamics, and process-based biogeochemical modelling. My published work spans machine-learning soil mapping with remote sensing, soil spectroscopy, and tillage effects on carbon and my day-to-day tools are R, Python,DayCent, Google Earth Engine, and high-performance computing at landscape scale.\nThrough Krotovina, I bring that same scientific rigour to organizations working in carbon markets, climate risk, and agricultural sustainability: defensible, reproducible analysis with uncertainty treated honestly, whether the question is a soil carbon baseline, an MMRV workflow, or making sense of a complex environmental dataset."
+  },
+  {
+    "objectID": "about.html#about",
+    "href": "about.html#about",
+    "title": "Krotovina Data Insights",
+    "section": "",
+    "text": "I’m Preston Sorenson a soil scientist and quantitative analyst, and the founder of Krotovina Data Insights. I hold a Ph.D. in Soil Science and I am a Professional Agrologist (P.Ag.), with a research background in predictive soil mapping, soil carbon and nitrogen dynamics, and process-based biogeochemical modelling. My published work spans machine-learning soil mapping with remote sensing, soil spectroscopy, and tillage effects on carbon and my day-to-day tools are R, Python,DayCent, Google Earth Engine, and high-performance computing at landscape scale.\nThrough Krotovina, I bring that same scientific rigour to organizations working in carbon markets, climate risk, and agricultural sustainability: defensible, reproducible analysis with uncertainty treated honestly, whether the question is a soil carbon baseline, an MMRV workflow, or making sense of a complex environmental dataset."
   }
 ]

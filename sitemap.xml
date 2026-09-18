@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://yourdomain.com/about.html</loc>
-    <lastmod>2026-09-17T23:27:03.297Z</lastmod>
+    <loc>https://yourdomain.com/blog.html</loc>
+    <lastmod>2026-09-18T18:48:23.535Z</lastmod>
   </url>
   <url>
-    <loc>https://yourdomain.com/contact.html</loc>
-    <lastmod>2026-09-18T14:21:08.562Z</lastmod>
+    <loc>https://yourdomain.com/index.html</loc>
+    <lastmod>2026-09-18T18:51:19.771Z</lastmod>
+  </url>
+  <url>
+    <loc>https://yourdomain.com/posts/soc-crop-yields/index.html</loc>
+    <lastmod>2026-09-18T18:45:48.735Z</lastmod>
   </url>
   <url>
     <loc>https://yourdomain.com/services.html</loc>
     <lastmod>2026-09-17T23:27:03.299Z</lastmod>
   </url>
   <url>
-    <loc>https://yourdomain.com/index.html</loc>
-    <lastmod>2026-09-17T23:27:03.299Z</lastmod>
+    <loc>https://yourdomain.com/contact.html</loc>
+    <lastmod>2026-09-18T14:21:08.562Z</lastmod>
+  </url>
+  <url>
+    <loc>https://yourdomain.com/posts/canola-climate-scenarios/canola-climate-post.html</loc>
+    <lastmod>2026-09-18T19:00:52.372Z</lastmod>
+  </url>
+  <url>
+    <loc>https://yourdomain.com/about.html</loc>
+    <lastmod>2026-09-17T23:27:03.297Z</lastmod>
   </url>
 </urlset>
