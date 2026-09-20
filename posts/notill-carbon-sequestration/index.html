@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Preston Sorenson">
+<meta name="dcterms.date" content="2026-09-20">
+<meta name="description" content="Linking predictive soil maps to a process-based carbon model to estimate what no-till has already sequestered across Saskatchewan and how much room is left as the climate warms.">
 
-<title>Articles – Krotovina Data Insights</title>
+<title>How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100 – Krotovina Data Insights</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,25 +32,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,77 +76,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
+<link rel="stylesheet" href="../../styles.css">
+</head>
 
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="Krotovina Data Insights" href="blog.xml" data-external="1"></head>
-
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Krotovina Data Insights</span>
     </a>
   </div>
@@ -156,19 +99,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./services.html"> 
+    <a class="nav-link" href="../../services.html"> 
 <span class="menu-text">Services</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Articles</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contact.html"> 
+    <a class="nav-link" href="../../contact.html"> 
 <span class="menu-text">Contact</span></a>
   </li>  
 </ul>
@@ -182,21 +125,44 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Y2Fub2xh">canola <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FyYm9uJTIwbWFya2V0cw==">carbon markets <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y2xpbWF0ZSUyMHJpc2s=">climate risk <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xpbWF0ZSUyMHNjZW5hcmlvcw==">climate scenarios <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xpbWF0ZSUyMHZhcmlhYmlsaXR5">climate variability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y3JvcCUyMHlpZWxk">crop yield <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TU1SVg==">MMRV <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bm8tdGlsbA==">no-till <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJlZGljdGl2ZSUyMG1vZGVsbGluZw==">predictive modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJlZGljdGl2ZSUyMHNvaWwlMjBtYXBwaW5n">predictive soil mapping <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvY2VzcyUyMG1vZGVsbGluZw==">process modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVtb3RlJTIwc2Vuc2luZw==">remote sensing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c29pbCUyMGNhcmJvbg==">soil carbon <span class="quarto-category-count">(3)</span></div><div class="category" data-category="c29pbCUyMG1vbml0b3Jpbmc=">soil monitoring <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Articles</h1>
-</div>
+<h1 class="title">How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">carbon markets</div>
+    <div class="quarto-category">soil carbon</div>
+    <div class="quarto-category">no-till</div>
+    <div class="quarto-category">process modelling</div>
+    <div class="quarto-category">MMRV</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Linking predictive soil maps to a process-based carbon model to estimate what no-till has already sequestered across Saskatchewan and how much room is left as the climate warms.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Preston Sorenson </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 20, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -206,165 +172,43 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Y2FyYm9uJTIwbWFya2V0cyUyQ01NUlYlMkNzb2lsJTIwY2FyYm9uJTJDc29pbCUyMG1vbml0b3JpbmclMkNjbGltYXRlJTIwdmFyaWFiaWxpdHk=" data-listing-date-sort="1789876800000" data-listing-file-modified-sort="1789926713771" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="539">
-<div class="thumbnail"><a href="./posts/som-climate-cycles/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/som-climate-cycles/som_precipitation.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/som-climate-cycles/index.html" class="no-external">Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2FyYm9uJTIwbWFya2V0cw=='); return false;">carbon markets</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TU1SVg=='); return false;">MMRV</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29pbCUyMGNhcmJvbg=='); return false;">soil carbon</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29pbCUyMG1vbml0b3Jpbmc='); return false;">soil monitoring</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xpbWF0ZSUyMHZhcmlhYmlsaXR5'); return false;">climate variability</div>
-
+<p>No-till farming is one of the great soil-carbon success stories of the Canadian Prairies. By reducing soil disturbance, it has steadily rebuilt organic carbon across Saskatchewan since adoption took off in the 1990s. That success is exactly why the next question is the hard one, and the one that matters most for carbon markets: how much carbon can no-till <em>still</em> sequester from here, and for how long?</p>
+<p>I built a model to answer that province-wide, out to 2100.</p>
+<section id="pairing-soil-maps-with-a-carbon-process-model" class="level2">
+<h2 class="anchored" data-anchor-id="pairing-soil-maps-with-a-carbon-process-model">Pairing soil maps with a carbon process model</h2>
+<p>Estimating future carbon change means simulating the system, not just extrapolating a trend. So this work links two things: predictive soil maps that supply the starting soil carbon, texture, and bulk density for every quarter section, and the CENTURY biogeochemical process model, which simulates how carbon actually cycles through the soil year by year under a given climate and set of crop residue inputs.</p>
+<p>A couple of details make the estimate credible. I esetimated when no-till was adopted on each parcel using satellite imagery based on the disappearance of bare soil in satellite imagery so the model starts adding no-till carbon at the right time and place. I then validated it against the Prairie Soil Carbon Balance network, a set of long-term monitored benchmark sites; using those measured starting values, the modelled and observed carbon stocks agreed closely (R-squared of 0.80). I then ran it forward under three climate pathways - low, moderate, and high emissions - to 2100.</p>
+</section>
+<section id="what-no-till-has-done-and-whats-left" class="level2">
+<h2 class="anchored" data-anchor-id="what-no-till-has-done-and-whats-left">What no-till has done, and what’s left</h2>
+<p>This figure is the whole story in one line. The steep black curve is the historical change in soil organic carbon; the coloured curves are the three future climate scenarios.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="soc_trajectory.png" class="img-fluid figure-img"></p>
+<figcaption>Modelled soil organic carbon stock in Saskatchewan cropland: historical gains (black) and future trajectories under low (SSP126), moderate (SSP245), and high (SSP585) emissions. From Sorenson et al.&nbsp;(2024), <em>Canadian Journal of Soil Science</em>, used under CC BY.</figcaption>
+</figure>
 </div>
-<div class="delink listing-description"><a href="./posts/som-climate-cycles/index.html" class="no-external">
-<p>Nearly a decade of soil data from one Saskatchewan farm shows soil organic matter rising and falling with rainfall, a short-term swing that soil carbon monitoring has to account for.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/som-climate-cycles/index.html" class="no-external">
-<div class="listing-date">
-Sep 20, 2026
-</div>
-<div class="listing-author">
-Preston Sorenson
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Y2FyYm9uJTIwbWFya2V0cyUyQ3NvaWwlMjBjYXJib24lMkNuby10aWxsJTJDcHJvY2VzcyUyMG1vZGVsbGluZyUyQ01NUlY=" data-listing-date-sort="1789876800000" data-listing-file-modified-sort="1789926461913" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="679">
-<div class="thumbnail"><a href="./posts/notill-carbon-sequestration/index.html" class="no-external">
+<p>Historically, no-till added about <strong>2.8 Mg of carbon per hectare</strong> in the top 20 cm, the steep part of the climb. The forward projection carries two messages at once. Carbon keeps accumulating in every scenario, so no-till stays a net benefit. But the curve visibly flattens: the annual rate of gain falls from about <strong>0.06 Mg/ha/yr today to under 0.02 Mg/ha/yr</strong> by late century. The soils are approaching a new equilibrium, and warming accelerates the decomposition that works against accumulation.</p>
+<p>Scenario matters, but not the way you might expect. Under low emissions, cropland gains about <strong>3.1 Mg/ha</strong> by 2100; under both moderate <em>and</em> high emissions, only about <strong>2.3 Mg/ha</strong> and the two upper pathways nearly converge. The big step down happens moving from low to moderate warming, not from moderate to high.</p>
+<p>In whole-province terms, no-till sequestered on the order of <strong>6 million tonnes of CO2-equivalent per year</strong> in Saskatchewan as of the mid-2010s. That annual rate is projected to fall by roughly half or more by 2100 - to somewhere between about 1.2 and 1.8 Mt CO2e per year, depending on how much the climate warms.</p>
+</section>
+<section id="the-part-that-matters-for-carbon-programs" class="level2">
+<h2 class="anchored" data-anchor-id="the-part-that-matters-for-carbon-programs">The part that matters for carbon programs</h2>
+<p>Two findings should shape how anyone approaches soil-carbon crediting here.</p>
+<p>First, <strong>the marginal tonne is getting harder to add.</strong> Cumulative stocks are still rising, but the <em>rate</em> is in decline. For crediting, that’s the crux of the additionality and baseline question: a project counting on future no-till gains is working against a shrinking per-year margin, and the forecast needs to reflect that rather than assume past rates continue.</p>
+<p>Second, <strong>the remaining potential is not spread evenly.</strong> Much of the Black soil zone in the north has already realized most of its no-till gains, so its future potential is lower. The largest remaining upside sits in the drier <strong>Dark Brown and Brown soil zones</strong> of south-central and western Saskatchewan, which started lower and have more room to add carbon. For siting projects or targeting incentives, geography is decisive and a provincial average would mislead you in both directions.</p>
+<p>Extending the gains further will likely take more than no-till alone: better residue management, and crop varieties bred for larger, more stable belowground inputs.</p>
+</section>
+<section id="why-this-kind-of-modelling-matters" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-kind-of-modelling-matters">Why this kind of modelling matters</h2>
+<p>Turning a soil-carbon question into a defensible number means combining spatial soil data, a process model that respects the biogeochemistry, honest treatment of climate scenarios, and validation against real monitored sites.</p>
+<hr>
+<p><em>This article summarizes: Sorenson, P. T., Bedard-Haughn, A. K., &amp; St. Luce, M. (2024). Combining predictive soil mapping and process models to estimate future carbon sequestration potential under no-till. Canadian Journal of Soil Science. <a href="https://doi.org/10.1139/cjss-2024-0046">https://doi.org/10.1139/cjss-2024-0046</a></em></p>
 
-<img loading="lazy" src="./posts/notill-carbon-sequestration/soc_trajectory.png" class="thumbnail-image">
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/notill-carbon-sequestration/index.html" class="no-external">How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100</a>
-</h3>
-<div class="listing-categories">
+</section>
 
-<div class="listing-category" onclick="window.quartoListingCategory('Y2FyYm9uJTIwbWFya2V0cw=='); return false;">carbon markets</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29pbCUyMGNhcmJvbg=='); return false;">soil carbon</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bm8tdGlsbA=='); return false;">no-till</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvY2VzcyUyMG1vZGVsbGluZw=='); return false;">process modelling</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TU1SVg=='); return false;">MMRV</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/notill-carbon-sequestration/index.html" class="no-external">
-<p>Linking predictive soil maps to a process-based carbon model to estimate what no-till has already sequestered across Saskatchewan and how much room is left as the climate warms.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/notill-carbon-sequestration/index.html" class="no-external">
-<div class="listing-date">
-Sep 20, 2026
-</div>
-<div class="listing-author">
-Preston Sorenson
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Y2xpbWF0ZSUyMHJpc2slMkNjYW5vbGElMkNjcm9wJTIweWllbGQlMkNjbGltYXRlJTIwc2NlbmFyaW9zJTJDcHJlZGljdGl2ZSUyMG1vZGVsbGluZw==" data-listing-date-sort="1789790400000" data-listing-file-modified-sort="1789758052372" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="679">
-<div class="thumbnail"><a href="./posts/canola-climate-scenarios/canola-climate-post.html" class="no-external">
-
-<img loading="lazy" src="./posts/canola-climate-scenarios/canola_climate_scenarios.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/canola-climate-scenarios/canola-climate-post.html" class="no-external">Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xpbWF0ZSUyMHJpc2s='); return false;">climate risk</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2Fub2xh'); return false;">canola</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y3JvcCUyMHlpZWxk'); return false;">crop yield</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xpbWF0ZSUyMHNjZW5hcmlvcw=='); return false;">climate scenarios</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJlZGljdGl2ZSUyMG1vZGVsbGluZw=='); return false;">predictive modelling</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/canola-climate-scenarios/canola-climate-post.html" class="no-external">
-<p>Combining 26 climate models with predictive soil mapping to forecast Saskatchewan canola yields to 2100.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/canola-climate-scenarios/canola-climate-post.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2026
-</div>
-<div class="listing-author">
-Preston Sorenson
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="c29pbCUyMGNhcmJvbiUyQ3ByZWRpY3RpdmUlMjBzb2lsJTIwbWFwcGluZyUyQ2Nyb3AlMjB5aWVsZCUyQ3JlbW90ZSUyMHNlbnNpbmc=" data-listing-date-sort="1789704000000" data-listing-file-modified-sort="1789757148735" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="522">
-<div class="thumbnail"><a href="./posts/soc-crop-yields/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/soc-crop-yields/soc_map_saskatchewan.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/soc-crop-yields/index.html" class="no-external">What Soil Organic Carbon Is Worth to Prairie Crop Yields</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29pbCUyMGNhcmJvbg=='); return false;">soil carbon</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJlZGljdGl2ZSUyMHNvaWwlMjBtYXBwaW5n'); return false;">predictive soil mapping</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y3JvcCUyMHlpZWxk'); return false;">crop yield</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cmVtb3RlJTIwc2Vuc2luZw=='); return false;">remote sensing</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/soc-crop-yields/index.html" class="no-external">
-<p>Mapping soil organic carbon across Saskatchewan and linking it to millions of yield records shows what a one percent gain in SOC is worth to farmers and where it has the most benefit.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/soc-crop-yields/index.html" class="no-external">
-<div class="listing-date">
-Sep 18, 2026
-</div>
-<div class="listing-author">
-Preston Sorenson
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

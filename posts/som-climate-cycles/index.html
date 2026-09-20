@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Preston Sorenson">
+<meta name="dcterms.date" content="2026-09-20">
+<meta name="description" content="Nearly a decade of soil data from one Saskatchewan farm shows soil organic matter rising and falling with rainfall, a short-term swing that soil carbon monitoring has to account for.">
 
-<title>Articles – Krotovina Data Insights</title>
+<title>Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring – Krotovina Data Insights</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -29,25 +32,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -75,77 +76,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
+<link rel="stylesheet" href="../../styles.css">
+</head>
 
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
-<link rel="alternate" type="application/rss+xml" title="Krotovina Data Insights" href="blog.xml" data-external="1"></head>
-
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Krotovina Data Insights</span>
     </a>
   </div>
@@ -156,19 +99,19 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./services.html"> 
+    <a class="nav-link" href="../../services.html"> 
 <span class="menu-text">Services</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Articles</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./contact.html"> 
+    <a class="nav-link" href="../../contact.html"> 
 <span class="menu-text">Contact</span></a>
   </li>  
 </ul>
@@ -182,21 +125,44 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Y2Fub2xh">canola <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2FyYm9uJTIwbWFya2V0cw==">carbon markets <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Y2xpbWF0ZSUyMHJpc2s=">climate risk <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xpbWF0ZSUyMHNjZW5hcmlvcw==">climate scenarios <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xpbWF0ZSUyMHZhcmlhYmlsaXR5">climate variability <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y3JvcCUyMHlpZWxk">crop yield <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TU1SVg==">MMRV <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bm8tdGlsbA==">no-till <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJlZGljdGl2ZSUyMG1vZGVsbGluZw==">predictive modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJlZGljdGl2ZSUyMHNvaWwlMjBtYXBwaW5n">predictive soil mapping <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cHJvY2VzcyUyMG1vZGVsbGluZw==">process modelling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVtb3RlJTIwc2Vuc2luZw==">remote sensing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c29pbCUyMGNhcmJvbg==">soil carbon <span class="quarto-category-count">(3)</span></div><div class="category" data-category="c29pbCUyMG1vbml0b3Jpbmc=">soil monitoring <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Articles</h1>
-</div>
+<h1 class="title">Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">carbon markets</div>
+    <div class="quarto-category">MMRV</div>
+    <div class="quarto-category">soil carbon</div>
+    <div class="quarto-category">soil monitoring</div>
+    <div class="quarto-category">climate variability</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    Nearly a decade of soil data from one Saskatchewan farm shows soil organic matter rising and falling with rainfall, a short-term swing that soil carbon monitoring has to account for.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Preston Sorenson </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 20, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -206,165 +172,39 @@ window.Quarto = {
 </header>
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Y2FyYm9uJTIwbWFya2V0cyUyQ01NUlYlMkNzb2lsJTIwY2FyYm9uJTJDc29pbCUyMG1vbml0b3JpbmclMkNjbGltYXRlJTIwdmFyaWFiaWxpdHk=" data-listing-date-sort="1789876800000" data-listing-file-modified-sort="1789926713771" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="539">
-<div class="thumbnail"><a href="./posts/som-climate-cycles/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/som-climate-cycles/som_precipitation.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/som-climate-cycles/index.html" class="no-external">Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2FyYm9uJTIwbWFya2V0cw=='); return false;">carbon markets</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TU1SVg=='); return false;">MMRV</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29pbCUyMGNhcmJvbg=='); return false;">soil carbon</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29pbCUyMG1vbml0b3Jpbmc='); return false;">soil monitoring</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xpbWF0ZSUyMHZhcmlhYmlsaXR5'); return false;">climate variability</div>
-
+<p>Most conversations about building soil carbon focus on management: no-till, cover crops, better rotations. Those practices work, and the long-term trends they produce are real. But there’s a shorter-term signal riding on top of that trend that’s easy to miss and expensive to misread: soil carbon moves with the weather. This study set out to measure how tightly.</p>
+<section id="a-decade-of-data-from-one-farm" class="level2">
+<h2 class="anchored" data-anchor-id="a-decade-of-data-from-one-farm">A decade of data from one farm</h2>
+<p>The analysis drew on 3,861 agronomic soil samples collected from the top 15 cm across roughly 4,700 hectares of a southeastern Saskatchewan farm, over 2013 to 2022. I paired the soil organic matter record with total annual precipitation from the nearest weather station, and compared five-year moving averages of each to look at the direction both were trending rather than the noise of any single year.</p>
+</section>
+<section id="the-two-move-together" class="level2">
+<h2 class="anchored" data-anchor-id="the-two-move-together">The two move together</h2>
+<p>The result was striking in its simplicity.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="som_precipitation.png" class="img-fluid figure-img"></p>
+<figcaption>Five-year moving averages of soil organic matter (black, left axis, with one-standard-deviation error bars) and total annual precipitation (blue, right axis) for a southeastern Saskatchewan farm, 2013-2022. From Sorenson &amp; Bedard-Haughn (2025), <em>Canadian Journal of Soil Science</em>, used under CC BY.</figcaption>
+</figure>
 </div>
-<div class="delink listing-description"><a href="./posts/som-climate-cycles/index.html" class="no-external">
-<p>Nearly a decade of soil data from one Saskatchewan farm shows soil organic matter rising and falling with rainfall, a short-term swing that soil carbon monitoring has to account for.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/som-climate-cycles/index.html" class="no-external">
-<div class="listing-date">
-Sep 20, 2026
-</div>
-<div class="listing-author">
-Preston Sorenson
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Y2FyYm9uJTIwbWFya2V0cyUyQ3NvaWwlMjBjYXJib24lMkNuby10aWxsJTJDcHJvY2VzcyUyMG1vZGVsbGluZyUyQ01NUlY=" data-listing-date-sort="1789876800000" data-listing-file-modified-sort="1789926461913" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="679">
-<div class="thumbnail"><a href="./posts/notill-carbon-sequestration/index.html" class="no-external">
+<p>Soil organic matter and precipitation were <strong>highly correlated (r = 0.91)</strong>. The relatively wet years through 2017 coincided with higher soil organic matter; the dry stretch that followed brought a clear decline, bottoming out around 2021 when both precipitation and soil organic matter hit their lowest point. Temperature, by contrast, showed only a weak relationship in this dataset, rainfall was the dominant climate lever.</p>
+<p>The likely mechanism is straightforward: in drier years, crops produce less biomass, so less carbon returns to the soil as residue and roots. That reduction in carbon <em>inputs</em> appears to matter more than any change in decomposition rate, and it shows up quickly in the more labile fraction of soil organic matter.</p>
+</section>
+<section id="why-this-is-a-monitoring-problem-not-just-a-curiosity" class="level2">
+<h2 class="anchored" data-anchor-id="why-this-is-a-monitoring-problem-not-just-a-curiosity">Why this is a monitoring problem, not just a curiosity</h2>
+<p>Here’s where it matters for carbon markets and MMRV. If soil carbon can swing by this much in response to a few wet or dry years, then a monitoring window that happens to fall in a dry stretch can show a “loss” that has nothing to do with management and one that lands in a wet stretch can overstate the gain. The same field, honestly measured, can look like a success or a failure depending purely on when you sampled relative to the rainfall cycle.</p>
+<p>Concretely: a project could bank a real management gain over its first five years, then post an apparent decline over the next five simply because of below average rainfall even as the underlying, management-driven trend stays positive. Read either window in isolation and you’d draw the wrong conclusion.</p>
+<p>The implication isn’t that soil carbon monitoring is unreliable, it’s that it has to be done with the climate signal explicitly in view. Credible measurement, reporting, and verification need to separate the weather-driven swing from the management-driven trend, whether by normalizing for precipitation, using climate-matched baselines, or monitoring over windows long enough for short-term cycles to average out. Attributing a rainfall-driven change to a farming practice, in either direction, is one of the easier ways to get a soil carbon number wrong.</p>
+</section>
+<section id="the-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="the-takeaway">The takeaway</h2>
+<p>Long-term soil carbon gains from good management are real and worth crediting. But over the few-year horizons that monitoring programs actually operate on, precipitation can dominate the signal. Any soil carbon assessment that doesn’t account for it is at risk of measuring the weather and calling it management.</p>
+<hr>
+<p><em>This article summarizes: Sorenson, P. T., &amp; Bedard-Haughn, A. K. (2025). Soil organic matter is responsive to short-term climate cycles. Canadian Journal of Soil Science. <a href="https://doi.org/10.1139/cjss-2024-0103">https://doi.org/10.1139/cjss-2024-0103</a></em></p>
 
-<img loading="lazy" src="./posts/notill-carbon-sequestration/soc_trajectory.png" class="thumbnail-image">
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/notill-carbon-sequestration/index.html" class="no-external">How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100</a>
-</h3>
-<div class="listing-categories">
+</section>
 
-<div class="listing-category" onclick="window.quartoListingCategory('Y2FyYm9uJTIwbWFya2V0cw=='); return false;">carbon markets</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29pbCUyMGNhcmJvbg=='); return false;">soil carbon</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('bm8tdGlsbA=='); return false;">no-till</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvY2VzcyUyMG1vZGVsbGluZw=='); return false;">process modelling</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('TU1SVg=='); return false;">MMRV</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/notill-carbon-sequestration/index.html" class="no-external">
-<p>Linking predictive soil maps to a process-based carbon model to estimate what no-till has already sequestered across Saskatchewan and how much room is left as the climate warms.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/notill-carbon-sequestration/index.html" class="no-external">
-<div class="listing-date">
-Sep 20, 2026
-</div>
-<div class="listing-author">
-Preston Sorenson
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Y2xpbWF0ZSUyMHJpc2slMkNjYW5vbGElMkNjcm9wJTIweWllbGQlMkNjbGltYXRlJTIwc2NlbmFyaW9zJTJDcHJlZGljdGl2ZSUyMG1vZGVsbGluZw==" data-listing-date-sort="1789790400000" data-listing-file-modified-sort="1789758052372" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="679">
-<div class="thumbnail"><a href="./posts/canola-climate-scenarios/canola-climate-post.html" class="no-external">
-
-<img loading="lazy" src="./posts/canola-climate-scenarios/canola_climate_scenarios.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/canola-climate-scenarios/canola-climate-post.html" class="no-external">Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xpbWF0ZSUyMHJpc2s='); return false;">climate risk</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2Fub2xh'); return false;">canola</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y3JvcCUyMHlpZWxk'); return false;">crop yield</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xpbWF0ZSUyMHNjZW5hcmlvcw=='); return false;">climate scenarios</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJlZGljdGl2ZSUyMG1vZGVsbGluZw=='); return false;">predictive modelling</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/canola-climate-scenarios/canola-climate-post.html" class="no-external">
-<p>Combining 26 climate models with predictive soil mapping to forecast Saskatchewan canola yields to 2100.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/canola-climate-scenarios/canola-climate-post.html" class="no-external">
-<div class="listing-date">
-Sep 19, 2026
-</div>
-<div class="listing-author">
-Preston Sorenson
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="c29pbCUyMGNhcmJvbiUyQ3ByZWRpY3RpdmUlMjBzb2lsJTIwbWFwcGluZyUyQ2Nyb3AlMjB5aWVsZCUyQ3JlbW90ZSUyMHNlbnNpbmc=" data-listing-date-sort="1789704000000" data-listing-file-modified-sort="1789757148735" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="522">
-<div class="thumbnail"><a href="./posts/soc-crop-yields/index.html" class="no-external">
-
-<img loading="lazy" src="./posts/soc-crop-yields/soc_map_saskatchewan.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/soc-crop-yields/index.html" class="no-external">What Soil Organic Carbon Is Worth to Prairie Crop Yields</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('c29pbCUyMGNhcmJvbg=='); return false;">soil carbon</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cHJlZGljdGl2ZSUyMHNvaWwlMjBtYXBwaW5n'); return false;">predictive soil mapping</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('Y3JvcCUyMHlpZWxk'); return false;">crop yield</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('cmVtb3RlJTIwc2Vuc2luZw=='); return false;">remote sensing</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/soc-crop-yields/index.html" class="no-external">
-<p>Mapping soil organic carbon across Saskatchewan and linking it to millions of yield records shows what a one percent gain in SOC is worth to farmers and where it has the most benefit.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/soc-crop-yields/index.html" class="no-external">
-<div class="listing-date">
-Sep 18, 2026
-</div>
-<div class="listing-author">
-Preston Sorenson
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

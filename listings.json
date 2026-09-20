@@ -2,6 +2,8 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/som-climate-cycles/index.html",
+      "/posts/notill-carbon-sequestration/index.html",
       "/posts/canola-climate-scenarios/canola-climate-post.html",
       "/posts/soc-crop-yields/index.html"
     ]
@@ -9,6 +11,8 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/som-climate-cycles/index.html",
+      "/posts/notill-carbon-sequestration/index.html",
       "/posts/canola-climate-scenarios/canola-climate-post.html",
       "/posts/soc-crop-yields/index.html"
     ]

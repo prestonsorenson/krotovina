@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Articles",
     "section": "",
-    "text": "Canola Yields in a Warming Climate: A Scenario Map for Saskatchewan\n\n\n\nclimate risk\n\ncanola\n\ncrop yield\n\nclimate scenarios\n\npredictive modelling\n\n\n\nCombining 26 climate models with predictive soil mapping to forecast Saskatchewan canola yields to 2100.\n\n\n\n\n\nSep 19, 2026\n\n\nPreston Sorenson\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Soil Organic Carbon Is Worth to Prairie Crop Yields\n\n\n\nsoil carbon\n\npredictive soil mapping\n\ncrop yield\n\nremote sensing\n\n\n\nMapping soil organic carbon across Saskatchewan and linking it to millions of yield records shows what a one percent gain in SOC is worth to farmers and where it has the most benefit.\n\n\n\n\n\nSep 18, 2026\n\n\nPreston Sorenson\n\n\n\n\n\nNo matching items"
+    "text": "Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring\n\n\n\ncarbon markets\n\nMMRV\n\nsoil carbon\n\nsoil monitoring\n\nclimate variability\n\n\n\nNearly a decade of soil data from one Saskatchewan farm shows soil organic matter rising and falling with rainfall, a short-term swing that soil carbon monitoring has to account for.\n\n\n\n\n\nSep 20, 2026\n\n\nPreston Sorenson\n\n\n\n\n\n\n\n\n\n\n\n\nHow Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100\n\n\n\ncarbon markets\n\nsoil carbon\n\nno-till\n\nprocess modelling\n\nMMRV\n\n\n\nLinking predictive soil maps to a process-based carbon model to estimate what no-till has already sequestered across Saskatchewan and how much room is left as the climate warms.\n\n\n\n\n\nSep 20, 2026\n\n\nPreston Sorenson\n\n\n\n\n\n\n\n\n\n\n\n\nCanola Yields in a Warming Climate: A Scenario Map for Saskatchewan\n\n\n\nclimate risk\n\ncanola\n\ncrop yield\n\nclimate scenarios\n\npredictive modelling\n\n\n\nCombining 26 climate models with predictive soil mapping to forecast Saskatchewan canola yields to 2100.\n\n\n\n\n\nSep 19, 2026\n\n\nPreston Sorenson\n\n\n\n\n\n\n\n\n\n\n\n\nWhat Soil Organic Carbon Is Worth to Prairie Crop Yields\n\n\n\nsoil carbon\n\npredictive soil mapping\n\ncrop yield\n\nremote sensing\n\n\n\nMapping soil organic carbon across Saskatchewan and linking it to millions of yield records shows what a one percent gain in SOC is worth to farmers and where it has the most benefit.\n\n\n\n\n\nSep 18, 2026\n\n\nPreston Sorenson\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -18,7 +18,42 @@
     "href": "index.html#recent-articles",
     "title": "Krotovina Data Insights",
     "section": "Recent articles",
-    "text": "Recent articles\n\n\n\n\n\nCanola Yields in a Warming Climate: A Scenario Map for Saskatchewan\n\n\nCombining 26 climate models with predictive soil mapping to forecast Saskatchewan canola yields to 2100.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\n\n\nWhat Soil Organic Carbon Is Worth to Prairie Crop Yields\n\n\nMapping soil organic carbon across Saskatchewan and linking it to millions of yield records shows what a one percent gain in SOC is worth to farmers and where it has the most benefit.\n\n\n\n\n\nSep 18, 2026\n\n\n\n\n\nNo matching items\n\nSee all articles →"
+    "text": "Recent articles\n\n\n\n\n\nSoil Carbon Tracks the Rain: A Caution for Carbon Monitoring\n\n\nNearly a decade of soil data from one Saskatchewan farm shows soil organic matter rising and falling with rainfall, a short-term swing that soil carbon monitoring has to account for.\n\n\n\n\n\nSep 20, 2026\n\n\n\n\n\n\n\nHow Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100\n\n\nLinking predictive soil maps to a process-based carbon model to estimate what no-till has already sequestered across Saskatchewan and how much room is left as the climate warms.\n\n\n\n\n\nSep 20, 2026\n\n\n\n\n\n\n\nCanola Yields in a Warming Climate: A Scenario Map for Saskatchewan\n\n\nCombining 26 climate models with predictive soil mapping to forecast Saskatchewan canola yields to 2100.\n\n\n\n\n\nSep 19, 2026\n\n\n\n\n\nNo matching items\n\nSee all articles →"
+  },
+  {
+    "objectID": "posts/notill-carbon-sequestration/index.html",
+    "href": "posts/notill-carbon-sequestration/index.html",
+    "title": "How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100",
+    "section": "",
+    "text": "No-till farming is one of the great soil-carbon success stories of the Canadian Prairies. By reducing soil disturbance, it has steadily rebuilt organic carbon across Saskatchewan since adoption took off in the 1990s. That success is exactly why the next question is the hard one, and the one that matters most for carbon markets: how much carbon can no-till still sequester from here, and for how long?\nI built a model to answer that province-wide, out to 2100."
+  },
+  {
+    "objectID": "posts/notill-carbon-sequestration/index.html#pairing-soil-maps-with-a-carbon-process-model",
+    "href": "posts/notill-carbon-sequestration/index.html#pairing-soil-maps-with-a-carbon-process-model",
+    "title": "How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100",
+    "section": "Pairing soil maps with a carbon process model",
+    "text": "Pairing soil maps with a carbon process model\nEstimating future carbon change means simulating the system, not just extrapolating a trend. So this work links two things: predictive soil maps that supply the starting soil carbon, texture, and bulk density for every quarter section, and the CENTURY biogeochemical process model, which simulates how carbon actually cycles through the soil year by year under a given climate and set of crop residue inputs.\nA couple of details make the estimate credible. I esetimated when no-till was adopted on each parcel using satellite imagery based on the disappearance of bare soil in satellite imagery so the model starts adding no-till carbon at the right time and place. I then validated it against the Prairie Soil Carbon Balance network, a set of long-term monitored benchmark sites; using those measured starting values, the modelled and observed carbon stocks agreed closely (R-squared of 0.80). I then ran it forward under three climate pathways - low, moderate, and high emissions - to 2100."
+  },
+  {
+    "objectID": "posts/notill-carbon-sequestration/index.html#what-no-till-has-done-and-whats-left",
+    "href": "posts/notill-carbon-sequestration/index.html#what-no-till-has-done-and-whats-left",
+    "title": "How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100",
+    "section": "What no-till has done, and what’s left",
+    "text": "What no-till has done, and what’s left\nThis figure is the whole story in one line. The steep black curve is the historical change in soil organic carbon; the coloured curves are the three future climate scenarios.\n\n\n\nModelled soil organic carbon stock in Saskatchewan cropland: historical gains (black) and future trajectories under low (SSP126), moderate (SSP245), and high (SSP585) emissions. From Sorenson et al. (2024), Canadian Journal of Soil Science, used under CC BY.\n\n\nHistorically, no-till added about 2.8 Mg of carbon per hectare in the top 20 cm, the steep part of the climb. The forward projection carries two messages at once. Carbon keeps accumulating in every scenario, so no-till stays a net benefit. But the curve visibly flattens: the annual rate of gain falls from about 0.06 Mg/ha/yr today to under 0.02 Mg/ha/yr by late century. The soils are approaching a new equilibrium, and warming accelerates the decomposition that works against accumulation.\nScenario matters, but not the way you might expect. Under low emissions, cropland gains about 3.1 Mg/ha by 2100; under both moderate and high emissions, only about 2.3 Mg/ha and the two upper pathways nearly converge. The big step down happens moving from low to moderate warming, not from moderate to high.\nIn whole-province terms, no-till sequestered on the order of 6 million tonnes of CO2-equivalent per year in Saskatchewan as of the mid-2010s. That annual rate is projected to fall by roughly half or more by 2100 - to somewhere between about 1.2 and 1.8 Mt CO2e per year, depending on how much the climate warms."
+  },
+  {
+    "objectID": "posts/notill-carbon-sequestration/index.html#the-part-that-matters-for-carbon-programs",
+    "href": "posts/notill-carbon-sequestration/index.html#the-part-that-matters-for-carbon-programs",
+    "title": "How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100",
+    "section": "The part that matters for carbon programs",
+    "text": "The part that matters for carbon programs\nTwo findings should shape how anyone approaches soil-carbon crediting here.\nFirst, the marginal tonne is getting harder to add. Cumulative stocks are still rising, but the rate is in decline. For crediting, that’s the crux of the additionality and baseline question: a project counting on future no-till gains is working against a shrinking per-year margin, and the forecast needs to reflect that rather than assume past rates continue.\nSecond, the remaining potential is not spread evenly. Much of the Black soil zone in the north has already realized most of its no-till gains, so its future potential is lower. The largest remaining upside sits in the drier Dark Brown and Brown soil zones of south-central and western Saskatchewan, which started lower and have more room to add carbon. For siting projects or targeting incentives, geography is decisive and a provincial average would mislead you in both directions.\nExtending the gains further will likely take more than no-till alone: better residue management, and crop varieties bred for larger, more stable belowground inputs."
+  },
+  {
+    "objectID": "posts/notill-carbon-sequestration/index.html#why-this-kind-of-modelling-matters",
+    "href": "posts/notill-carbon-sequestration/index.html#why-this-kind-of-modelling-matters",
+    "title": "How Much Carbon Can No-Till Still Sequester? A Saskatchewan Forecast to 2100",
+    "section": "Why this kind of modelling matters",
+    "text": "Why this kind of modelling matters\nTurning a soil-carbon question into a defensible number means combining spatial soil data, a process model that respects the biogeochemistry, honest treatment of climate scenarios, and validation against real monitored sites.\n\nThis article summarizes: Sorenson, P. T., Bedard-Haughn, A. K., & St. Luce, M. (2024). Combining predictive soil mapping and process models to estimate future carbon sequestration potential under no-till. Canadian Journal of Soil Science. https://doi.org/10.1139/cjss-2024-0046"
   },
   {
     "objectID": "posts/soc-crop-yields/index.html",
@@ -103,6 +138,41 @@
     "title": "Contact",
     "section": "",
     "text": "I work with organizations in carbon markets, climate risk, and agricultural sustainability that need rigorous, defensible quantitative analysis. If you have a project in mind - or just want to talk through whether it’s a fit - I’d be glad to hear from you.\nWhen you reach out, a short description of your project, timeline, and the data you’re working with helps me give you a useful first response.\nEmail: Preston Sorenson (psorenson at krotovina dot ca)\nLinkedIn: preston-sorenson\nGoogle Scholar: Publications\nGitHub: prestonsorenson\nBased in Kitchener, Ontario. Available for projects with clients across Canada and internationally."
+  },
+  {
+    "objectID": "posts/som-climate-cycles/index.html",
+    "href": "posts/som-climate-cycles/index.html",
+    "title": "Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring",
+    "section": "",
+    "text": "Most conversations about building soil carbon focus on management: no-till, cover crops, better rotations. Those practices work, and the long-term trends they produce are real. But there’s a shorter-term signal riding on top of that trend that’s easy to miss and expensive to misread: soil carbon moves with the weather. This study set out to measure how tightly."
+  },
+  {
+    "objectID": "posts/som-climate-cycles/index.html#a-decade-of-data-from-one-farm",
+    "href": "posts/som-climate-cycles/index.html#a-decade-of-data-from-one-farm",
+    "title": "Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring",
+    "section": "A decade of data from one farm",
+    "text": "A decade of data from one farm\nThe analysis drew on 3,861 agronomic soil samples collected from the top 15 cm across roughly 4,700 hectares of a southeastern Saskatchewan farm, over 2013 to 2022. I paired the soil organic matter record with total annual precipitation from the nearest weather station, and compared five-year moving averages of each to look at the direction both were trending rather than the noise of any single year."
+  },
+  {
+    "objectID": "posts/som-climate-cycles/index.html#the-two-move-together",
+    "href": "posts/som-climate-cycles/index.html#the-two-move-together",
+    "title": "Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring",
+    "section": "The two move together",
+    "text": "The two move together\nThe result was striking in its simplicity.\n\n\n\nFive-year moving averages of soil organic matter (black, left axis, with one-standard-deviation error bars) and total annual precipitation (blue, right axis) for a southeastern Saskatchewan farm, 2013-2022. From Sorenson & Bedard-Haughn (2025), Canadian Journal of Soil Science, used under CC BY.\n\n\nSoil organic matter and precipitation were highly correlated (r = 0.91). The relatively wet years through 2017 coincided with higher soil organic matter; the dry stretch that followed brought a clear decline, bottoming out around 2021 when both precipitation and soil organic matter hit their lowest point. Temperature, by contrast, showed only a weak relationship in this dataset, rainfall was the dominant climate lever.\nThe likely mechanism is straightforward: in drier years, crops produce less biomass, so less carbon returns to the soil as residue and roots. That reduction in carbon inputs appears to matter more than any change in decomposition rate, and it shows up quickly in the more labile fraction of soil organic matter."
+  },
+  {
+    "objectID": "posts/som-climate-cycles/index.html#why-this-is-a-monitoring-problem-not-just-a-curiosity",
+    "href": "posts/som-climate-cycles/index.html#why-this-is-a-monitoring-problem-not-just-a-curiosity",
+    "title": "Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring",
+    "section": "Why this is a monitoring problem, not just a curiosity",
+    "text": "Why this is a monitoring problem, not just a curiosity\nHere’s where it matters for carbon markets and MMRV. If soil carbon can swing by this much in response to a few wet or dry years, then a monitoring window that happens to fall in a dry stretch can show a “loss” that has nothing to do with management and one that lands in a wet stretch can overstate the gain. The same field, honestly measured, can look like a success or a failure depending purely on when you sampled relative to the rainfall cycle.\nConcretely: a project could bank a real management gain over its first five years, then post an apparent decline over the next five simply because of below average rainfall even as the underlying, management-driven trend stays positive. Read either window in isolation and you’d draw the wrong conclusion.\nThe implication isn’t that soil carbon monitoring is unreliable, it’s that it has to be done with the climate signal explicitly in view. Credible measurement, reporting, and verification need to separate the weather-driven swing from the management-driven trend, whether by normalizing for precipitation, using climate-matched baselines, or monitoring over windows long enough for short-term cycles to average out. Attributing a rainfall-driven change to a farming practice, in either direction, is one of the easier ways to get a soil carbon number wrong."
+  },
+  {
+    "objectID": "posts/som-climate-cycles/index.html#the-takeaway",
+    "href": "posts/som-climate-cycles/index.html#the-takeaway",
+    "title": "Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring",
+    "section": "The takeaway",
+    "text": "The takeaway\nLong-term soil carbon gains from good management are real and worth crediting. But over the few-year horizons that monitoring programs actually operate on, precipitation can dominate the signal. Any soil carbon assessment that doesn’t account for it is at risk of measuring the weather and calling it management.\n\nThis article summarizes: Sorenson, P. T., & Bedard-Haughn, A. K. (2025). Soil organic matter is responsive to short-term climate cycles. Canadian Journal of Soil Science. https://doi.org/10.1139/cjss-2024-0103"
   },
   {
     "objectID": "posts/canola-climate-scenarios/canola-climate-post.html",
