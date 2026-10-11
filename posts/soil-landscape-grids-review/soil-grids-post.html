@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Preston Sorenson">
+<meta name="dcterms.date" content="2026-10-11">
+<meta name="keywords" content="Soil Landscape Grids of Canada, 100 m soil maps, CanSIS, digital soil mapping, predictive soil mapping, soil organic carbon, Canada soil data, soil map accuracy, soil map validation, out-of-bag error, random forest, soil covariates">
+<meta name="description" content="An assessment of the 100 m Soil Landscape Grids of Canada (version dated 2026-02-11): the reported accuracy rests on out-of-bag error that overstates real performance, independent validation is weak, and covariate choices produce systematic artifacts. A preliminary product, not yet suitable for carbon accounting, modelling, or decision making.">
+
+<title>The Soil Landscape Grids of Canada (100 m): A Preliminary Product That Is Not Yet Ready for Use – Krotovina Data Insights</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Krotovina Data Insights</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../services.html"> 
+<span class="menu-text">Services</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The Soil Landscape Grids of Canada (100 m): A Preliminary Product That Is Not Yet Ready for Use</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">soil mapping</div>
+    <div class="quarto-category">predictive soil mapping</div>
+    <div class="quarto-category">soil data</div>
+    <div class="quarto-category">commentary</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    An assessment of the 100 m Soil Landscape Grids of Canada (version dated 2026-02-11): the reported accuracy rests on out-of-bag error that overstates real performance, independent validation is weak, and covariate choices produce systematic artifacts. A preliminary product, not yet suitable for carbon accounting, modelling, or decision making.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Preston Sorenson </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 11, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>Soil Landscape Grids of Canada, 100 m soil maps, CanSIS, digital soil mapping, predictive soil mapping, soil organic carbon, Canada soil data, soil map accuracy, soil map validation, out-of-bag error, random forest, soil covariates</p>
+  </div>
+</div>
+
+</header>
+
+
+<p>In December 2024, the Canadian Soil Information Service (CanSIS) released the Soil Landscape Grids of Canada, a set of freely available, high-resolution (100 m) national maps covering seven soil properties across five depths.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This article assesses the version of the Soil Landscape Grids of Canada available as of the product page’s Date modified: 2026-02-11. CanSIS may revise the product over time, and later versions may differ from what is described here.</p>
+</div>
+</div>
+<p>A national, openly available soil dataset has been a long-standing goal for the Canadian soil science community, and the ambition behind this product is worth recognizing. Getting it right would be genuinely valuable for carbon accounting, greenhouse gas reporting, land management, and research.</p>
+<p>Before going further, I want to be clear about what this post is and is not. Many of the concerns I summarize here are not mine alone, and I do not claim credit for them. They were raised formally by a large, cross-country group of Canadian soil scientists and predictive soil mappers from academia and provincial governments. My goal is to help communicate those concerns to a wider audience, and to add some analysis of my own based on the product’s published documentation and on figures I have rendered directly from the released data.</p>
+<p>Since the December 2024 release, the methods have been documented in a peer-reviewed data descriptor (Geng et al., 2025, <em>Scientific Data</em>), which also provides uncertainty layers. That is a welcome and important addition. But reading the documentation carefully supports caution rather than confidence, for the reasons below.</p>
+<section id="the-reported-accuracy-overstates-real-world-performance" class="level2">
+<h2 class="anchored" data-anchor-id="the-reported-accuracy-overstates-real-world-performance">The reported accuracy overstates real-world performance</h2>
+<p>The data descriptor reports strong accuracy: an out-of-bag coefficient of determination (R-squared) of 0.82 for soil organic carbon at all three topsoil depths, and 0.70 to 0.76 for bulk density, sand, and clay.</p>
+<p>The problem is what “out-of-bag” means. Out-of-bag error is an internal estimate produced by a random forest model from its own training data, not an independent test. For soil data it tends to overstate real-world accuracy, for two reasons that both apply here. The training points are spatially clustered, concentrated in the agricultural south and collected largely between 1980 and 2000. Soil properties are spatially autocorrelated, as a result out-of-bag points are frequently very close to training points the model has effectively already seen. Nearby points leak information, and the resulting out-of-bag validation scores reflect performance in densely sampled areas rather than at genuinely independent locations across the country.</p>
+<p>The gap between that internal estimate and independent validation is substantial. When the maps were compared against independent provincial soil datasets:</p>
+<ul>
+<li>In the agricultural regions of southern Ontario, validation against roughly 1,500 recent soil samples found essentially no correlation for organic carbon, pH, sand, silt, clay, or cation exchange capacity.</li>
+<li>In southwestern Quebec, a comparison against tens of thousands of samples found little agreement for soil organic carbon, with many mineral soils (which hold well under 10% carbon) predicted to contain far more.</li>
+<li>In Saskatchewan, independent validation reached an R-squared of approximately 0.25 for topsoil carbon, roughly half the accuracy of other published provincial-scale carbon mapping in the same region. The dataset used for validation in this case is from the same time period as the data used to create the Soil Landscape Grids of Canada.</li>
+</ul>
+<p>An out-of-bag R-squared of 0.82 set against independent validation ranging from near zero to about 0.25 is the single clearest reason to treat the current accuracy claims with caution.</p>
+</section>
+<section id="the-artifacts-point-to-a-systemic-cause-covariate-choice" class="level2">
+<h2 class="anchored" data-anchor-id="the-artifacts-point-to-a-systemic-cause-covariate-choice">The artifacts point to a systemic cause: covariate choice</h2>
+<p>The problems are not limited to accuracy statistics. The maps contain systematic artifacts created due to the environmental covariates used to build them.</p>
+<p>Predictive soil mapping works by learning statistical relationships between soil observations and environmental covariates, and then applying those relationships everywhere. The output can only be as good as the covariates it is built on. If a covariate contains an artificial pattern, the model reproduces it in the soil predictions. Two covariate problems are clearly visible in the 0 to 5 cm soil organic carbon results.</p>
+<p><strong>Terrain covariates derived from a contour-based elevation model.</strong> Many of the covariates (slope, curvature, topographic position, valley depth, topographic wetness index, landform classes, and others) are derived from a national digital elevation model. When a soil map built on those terrain derivatives shows nested, concentric lines like the two examples below, from different regions, it means the elevation model itself carries contour-line interpolation artifacts, a known characteristic of national elevation data interpolated from digitized topographic contours. The terrain derivatives inherit the pattern, and the model recreates it straight into the carbon predictions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="contour_artifact.png" class="img-fluid figure-img"></p>
+<figcaption>Contouring artifacts (Boreal Transition, Saskatchewan) in the 0 to 5 cm soil organic carbon layer (scene roughly 41 km across). Predicted carbon forms nested, concentric lines that mirror elevation contours rather than real soil variation, the signature of a digital elevation model interpolated from contour lines. Rendered from the Soil Landscape Grids of Canada, version dated 2026-02-11.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="contour_artifact_southern_mb.png" class="img-fluid figure-img"></p>
+<figcaption>The same contouring pattern in a different region (southern Manitoba, scene roughly 25 km across), with contour-parallel banding and straight field and section lines. The recurrence of the pattern across separate areas indicates a systemic issue. Rendered from the Soil Landscape Grids of Canada, version dated 2026-02-11.</figcaption>
+</figure>
+</div>
+<p><strong>Vector datasets used as covariates and masks.</strong> The covariate set also includes polygon (vector) data, such as a national surficial geology map, and the product applies a depth-to-bedrock layer compiled from multiple raster and vector sources. The authors themselves note that this compilation produced abrupt division lines that needed correcting. Hard, straight edges of exactly this kind appear in the output, including the discontinuity along the Manitoba/Ontario border below. Soil does not change character along an administrative or map-sheet boundary, so these edges are covariate or data-compilation artifacts, not real soil variation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="border_artifact_mb_on.png" class="img-fluid figure-img"></p>
+<figcaption>A sharp discontinuity in the 0 to 5 cm soil organic carbon layer along the Manitoba/Ontario border (scene roughly 31 km across). Values are highly variable on one side and nearly uniform on the other, with the transition following the provincial boundary, a pattern that can only enter through a vector covariate or a change in data or processing along that line. Rendered from the Soil Landscape Grids of Canada, version dated 2026-02-11.</figcaption>
+</figure>
+</div>
+<p>These are not pixel-level inaccuracies to be smoothed over. They are structural, methodological artifacts that trace back to covariate selection and preparation, and they are exactly the kind of issue that consultation with the predictive soil mapping community would catch before release.</p>
+</section>
+<section id="the-correct-resolution-depends-on-the-training-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-correct-resolution-depends-on-the-training-data">The correct resolution depends on the training data</h2>
+<p>The product is mapped at 100 m. But the training data cannot support that resolution everywhere. The pedon data are clustered and were collected decades ago, so across most of the country the density of real observations behind any given pixel is very low. The historical pedon records also carry location uncertainties of roughly 300 m or more, which means the training points cannot reliably be tied to a 100 m pixel (the mapping resolution) in the first place.</p>
+<p>Mapping at a fine resolution over a huge area with sparse, imprecisely located data tends to compress the real variation in soil properties toward the average, so the map can look detailed while representing the landscape poorly. The resolution of a predictive soil map has to be selected carefully based on the properties of the training data: the right resolution follows from the location accuracy and density of the observations, and should be decided on that basis rather than set to match the finest available covariate grid. A product mapped finer than its data can support will look more precise than it actually is.</p>
+</section>
+<section id="how-this-happened" class="level2">
+<h2 class="anchored" data-anchor-id="how-this-happened">How this happened</h2>
+<p>National-scale soil mapping is genuinely hard, and it is nearly impossible to do well without the data and expertise that are spread across the country. In Canada, soil science capacity is decentralized: much of the current soil data and predictive mapping know-how now resides in provincial governments and academia. That community was not engaged to provide feedback or contribute to the development of the Soil Landscape Grids of Canada, and many practitioners only became aware of the product after it was released. That gap in collaboration is the most likely root cause of the issues above, including covariate choices and validation decisions that external review would have flagged immediately.</p>
+</section>
+<section id="the-key-point-for-anyone-considering-using-it" class="level2">
+<h2 class="anchored" data-anchor-id="the-key-point-for-anyone-considering-using-it">The key point for anyone considering using it</h2>
+<p>The independent evaluation of the Soil Landscape Grids of Canada suggests that this product should be viewed as still in development and not ready for carbon accounting, modelling, or use for decision making. Independent validation is weak, the reported accuracy relies on out-of-bag error that overstates performance, systematic artifacts are present, and the product itself is still labelled as under evaluation and review. The authors also note that accuracy is expected to improve as more ground data are added, which is a fair description of a product still in development.</p>
+<p>In its current form, the Soil Landscape Grids of Canada is best viewed as a preliminary soil map, released for review and revision with the Canadian soil mapping community. It is not ready to be used as an input for carbon accounting, biogeochemical modelling, or land-management and policy decisions. Using it for those purposes today would risk carrying its errors, and its artifacts, directly into downstream results.</p>
+</section>
+<section id="a-constructive-path-forward" class="level2">
+<h2 class="anchored" data-anchor-id="a-constructive-path-forward">A constructive path forward</h2>
+<p>None of this diminishes the value of the goal. A reliable national soil data infrastructure is worth building, and CanSIS has an important mandate in that space. A few steps would help this product get there:</p>
+<ol type="1">
+<li><strong>Continue to support the Canadian Soil Data Portal initiative</strong>, so that the current, consolidated data required for credible national-scale mapping is actually available to draw on.</li>
+<li><strong>Continue developing the product in collaboration with soil scientists from provincial governments and the academic community</strong>, rather than in isolation. For example, the Ontario Ministry of Agriculture, Food and Agribusiness has world-leading predictive soil mapping initiatives and operational processes that could be built on. Extensive research in predictive soil mapping is also taking place at universities across Canada.</li>
+<li><strong>Validate independently and consult before release.</strong> Future versions should be tested against independent, spatially representative data (not out-of-bag error alone), with the results and the covariate choices reviewed with Canadian stakeholders before public release.</li>
+</ol>
+<p>The expertise needed to make this product world class already exists in Canada. Bringing soil scientists across the country together is the path forward to build a national soil map that people can genuinely rely on, and many in the community would welcome the chance to help build it.</p>
+<hr>
+<p><em>Sources: Geng, X., He, J., Grima, V., Jiang, Y., Tetreau, M., Crittenden, S., Kiley, S., VandenBygaart, A. J., &amp; Vanrobaeys, J. (2025). 100 m soil landscape grids of Canada. Scientific Data, 12, 1178. <a href="https://doi.org/10.1038/s41597-025-05460-4">https://doi.org/10.1038/s41597-025-05460-4</a>. The independent provincial validation results summarized here were compiled by members of the Canadian soil mapping community. All figures were rendered by the author from the released product.</em></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/yourdomain\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

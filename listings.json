@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/soil-landscape-grids-review/soil-grids-post.html",
       "/posts/som-climate-cycles/index.html",
       "/posts/notill-carbon-sequestration/index.html",
       "/posts/canola-climate-scenarios/canola-climate-post.html",
@@ -11,6 +12,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/soil-landscape-grids-review/soil-grids-post.html",
       "/posts/som-climate-cycles/index.html",
       "/posts/notill-carbon-sequestration/index.html",
       "/posts/canola-climate-scenarios/canola-climate-post.html",

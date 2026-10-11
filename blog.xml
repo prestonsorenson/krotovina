@@ -10,7 +10,109 @@
 <atom:link href="https://yourdomain.com/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Sun, 20 Sep 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 11 Oct 2026 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Soil Landscape Grids of Canada (100 m): A Preliminary Product That Is Not Yet Ready for Use</title>
+  <dc:creator>Preston Sorenson</dc:creator>
+  <link>https://yourdomain.com/posts/soil-landscape-grids-review/soil-grids-post.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In December 2024, the Canadian Soil Information Service (CanSIS) released the Soil Landscape Grids of Canada, a set of freely available, high-resolution (100 m) national maps covering seven soil properties across five depths.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This article assesses the version of the Soil Landscape Grids of Canada available as of the product page’s Date modified: 2026-02-11. CanSIS may revise the product over time, and later versions may differ from what is described here.</p>
+</div>
+</div>
+<p>A national, openly available soil dataset has been a long-standing goal for the Canadian soil science community, and the ambition behind this product is worth recognizing. Getting it right would be genuinely valuable for carbon accounting, greenhouse gas reporting, land management, and research.</p>
+<p>Before going further, I want to be clear about what this post is and is not. Many of the concerns I summarize here are not mine alone, and I do not claim credit for them. They were raised formally by a large, cross-country group of Canadian soil scientists and predictive soil mappers from academia and provincial governments. My goal is to help communicate those concerns to a wider audience, and to add some analysis of my own based on the product’s published documentation and on figures I have rendered directly from the released data.</p>
+<p>Since the December 2024 release, the methods have been documented in a peer-reviewed data descriptor (Geng et al., 2025, <em>Scientific Data</em>), which also provides uncertainty layers. That is a welcome and important addition. But reading the documentation carefully supports caution rather than confidence, for the reasons below.</p>
+<section id="the-reported-accuracy-overstates-real-world-performance" class="level2">
+<h2 class="anchored" data-anchor-id="the-reported-accuracy-overstates-real-world-performance">The reported accuracy overstates real-world performance</h2>
+<p>The data descriptor reports strong accuracy: an out-of-bag coefficient of determination (R-squared) of 0.82 for soil organic carbon at all three topsoil depths, and 0.70 to 0.76 for bulk density, sand, and clay.</p>
+<p>The problem is what “out-of-bag” means. Out-of-bag error is an internal estimate produced by a random forest model from its own training data, not an independent test. For soil data it tends to overstate real-world accuracy, for two reasons that both apply here. The training points are spatially clustered, concentrated in the agricultural south and collected largely between 1980 and 2000. Soil properties are spatially autocorrelated, as a result out-of-bag points are frequently very close to training points the model has effectively already seen. Nearby points leak information, and the resulting out-of-bag validation scores reflect performance in densely sampled areas rather than at genuinely independent locations across the country.</p>
+<p>The gap between that internal estimate and independent validation is substantial. When the maps were compared against independent provincial soil datasets:</p>
+<ul>
+<li>In the agricultural regions of southern Ontario, validation against roughly 1,500 recent soil samples found essentially no correlation for organic carbon, pH, sand, silt, clay, or cation exchange capacity.</li>
+<li>In southwestern Quebec, a comparison against tens of thousands of samples found little agreement for soil organic carbon, with many mineral soils (which hold well under 10% carbon) predicted to contain far more.</li>
+<li>In Saskatchewan, independent validation reached an R-squared of approximately 0.25 for topsoil carbon, roughly half the accuracy of other published provincial-scale carbon mapping in the same region. The dataset used for validation in this case is from the same time period as the data used to create the Soil Landscape Grids of Canada.</li>
+</ul>
+<p>An out-of-bag R-squared of 0.82 set against independent validation ranging from near zero to about 0.25 is the single clearest reason to treat the current accuracy claims with caution.</p>
+</section>
+<section id="the-artifacts-point-to-a-systemic-cause-covariate-choice" class="level2">
+<h2 class="anchored" data-anchor-id="the-artifacts-point-to-a-systemic-cause-covariate-choice">The artifacts point to a systemic cause: covariate choice</h2>
+<p>The problems are not limited to accuracy statistics. The maps contain systematic artifacts created due to the environmental covariates used to build them.</p>
+<p>Predictive soil mapping works by learning statistical relationships between soil observations and environmental covariates, and then applying those relationships everywhere. The output can only be as good as the covariates it is built on. If a covariate contains an artificial pattern, the model reproduces it in the soil predictions. Two covariate problems are clearly visible in the 0 to 5 cm soil organic carbon results.</p>
+<p><strong>Terrain covariates derived from a contour-based elevation model.</strong> Many of the covariates (slope, curvature, topographic position, valley depth, topographic wetness index, landform classes, and others) are derived from a national digital elevation model. When a soil map built on those terrain derivatives shows nested, concentric lines like the two examples below, from different regions, it means the elevation model itself carries contour-line interpolation artifacts, a known characteristic of national elevation data interpolated from digitized topographic contours. The terrain derivatives inherit the pattern, and the model recreates it straight into the carbon predictions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/soil-landscape-grids-review/contour_artifact.png" class="img-fluid figure-img"></p>
+<figcaption>Contouring artifacts (Boreal Transition, Saskatchewan) in the 0 to 5 cm soil organic carbon layer (scene roughly 41 km across). Predicted carbon forms nested, concentric lines that mirror elevation contours rather than real soil variation, the signature of a digital elevation model interpolated from contour lines. Rendered from the Soil Landscape Grids of Canada, version dated 2026-02-11.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/soil-landscape-grids-review/contour_artifact_southern_mb.png" class="img-fluid figure-img"></p>
+<figcaption>The same contouring pattern in a different region (southern Manitoba, scene roughly 25 km across), with contour-parallel banding and straight field and section lines. The recurrence of the pattern across separate areas indicates a systemic issue. Rendered from the Soil Landscape Grids of Canada, version dated 2026-02-11.</figcaption>
+</figure>
+</div>
+<p><strong>Vector datasets used as covariates and masks.</strong> The covariate set also includes polygon (vector) data, such as a national surficial geology map, and the product applies a depth-to-bedrock layer compiled from multiple raster and vector sources. The authors themselves note that this compilation produced abrupt division lines that needed correcting. Hard, straight edges of exactly this kind appear in the output, including the discontinuity along the Manitoba/Ontario border below. Soil does not change character along an administrative or map-sheet boundary, so these edges are covariate or data-compilation artifacts, not real soil variation.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/soil-landscape-grids-review/border_artifact_mb_on.png" class="img-fluid figure-img"></p>
+<figcaption>A sharp discontinuity in the 0 to 5 cm soil organic carbon layer along the Manitoba/Ontario border (scene roughly 31 km across). Values are highly variable on one side and nearly uniform on the other, with the transition following the provincial boundary, a pattern that can only enter through a vector covariate or a change in data or processing along that line. Rendered from the Soil Landscape Grids of Canada, version dated 2026-02-11.</figcaption>
+</figure>
+</div>
+<p>These are not pixel-level inaccuracies to be smoothed over. They are structural, methodological artifacts that trace back to covariate selection and preparation, and they are exactly the kind of issue that consultation with the predictive soil mapping community would catch before release.</p>
+</section>
+<section id="the-correct-resolution-depends-on-the-training-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-correct-resolution-depends-on-the-training-data">The correct resolution depends on the training data</h2>
+<p>The product is mapped at 100 m. But the training data cannot support that resolution everywhere. The pedon data are clustered and were collected decades ago, so across most of the country the density of real observations behind any given pixel is very low. The historical pedon records also carry location uncertainties of roughly 300 m or more, which means the training points cannot reliably be tied to a 100 m pixel (the mapping resolution) in the first place.</p>
+<p>Mapping at a fine resolution over a huge area with sparse, imprecisely located data tends to compress the real variation in soil properties toward the average, so the map can look detailed while representing the landscape poorly. The resolution of a predictive soil map has to be selected carefully based on the properties of the training data: the right resolution follows from the location accuracy and density of the observations, and should be decided on that basis rather than set to match the finest available covariate grid. A product mapped finer than its data can support will look more precise than it actually is.</p>
+</section>
+<section id="how-this-happened" class="level2">
+<h2 class="anchored" data-anchor-id="how-this-happened">How this happened</h2>
+<p>National-scale soil mapping is genuinely hard, and it is nearly impossible to do well without the data and expertise that are spread across the country. In Canada, soil science capacity is decentralized: much of the current soil data and predictive mapping know-how now resides in provincial governments and academia. That community was not engaged to provide feedback or contribute to the development of the Soil Landscape Grids of Canada, and many practitioners only became aware of the product after it was released. That gap in collaboration is the most likely root cause of the issues above, including covariate choices and validation decisions that external review would have flagged immediately.</p>
+</section>
+<section id="the-key-point-for-anyone-considering-using-it" class="level2">
+<h2 class="anchored" data-anchor-id="the-key-point-for-anyone-considering-using-it">The key point for anyone considering using it</h2>
+<p>The independent evaluation of the Soil Landscape Grids of Canada suggests that this product should be viewed as still in development and not ready for carbon accounting, modelling, or use for decision making. Independent validation is weak, the reported accuracy relies on out-of-bag error that overstates performance, systematic artifacts are present, and the product itself is still labelled as under evaluation and review. The authors also note that accuracy is expected to improve as more ground data are added, which is a fair description of a product still in development.</p>
+<p>In its current form, the Soil Landscape Grids of Canada is best viewed as a preliminary soil map, released for review and revision with the Canadian soil mapping community. It is not ready to be used as an input for carbon accounting, biogeochemical modelling, or land-management and policy decisions. Using it for those purposes today would risk carrying its errors, and its artifacts, directly into downstream results.</p>
+</section>
+<section id="a-constructive-path-forward" class="level2">
+<h2 class="anchored" data-anchor-id="a-constructive-path-forward">A constructive path forward</h2>
+<p>None of this diminishes the value of the goal. A reliable national soil data infrastructure is worth building, and CanSIS has an important mandate in that space. A few steps would help this product get there:</p>
+<ol type="1">
+<li><strong>Continue to support the Canadian Soil Data Portal initiative</strong>, so that the current, consolidated data required for credible national-scale mapping is actually available to draw on.</li>
+<li><strong>Continue developing the product in collaboration with soil scientists from provincial governments and the academic community</strong>, rather than in isolation. For example, the Ontario Ministry of Agriculture, Food and Agribusiness has world-leading predictive soil mapping initiatives and operational processes that could be built on. Extensive research in predictive soil mapping is also taking place at universities across Canada.</li>
+<li><strong>Validate independently and consult before release.</strong> Future versions should be tested against independent, spatially representative data (not out-of-bag error alone), with the results and the covariate choices reviewed with Canadian stakeholders before public release.</li>
+</ol>
+<p>The expertise needed to make this product world class already exists in Canada. Bringing soil scientists across the country together is the path forward to build a national soil map that people can genuinely rely on, and many in the community would welcome the chance to help build it.</p>
+<hr>
+<p><em>Sources: Geng, X., He, J., Grima, V., Jiang, Y., Tetreau, M., Crittenden, S., Kiley, S., VandenBygaart, A. J., &amp; Vanrobaeys, J. (2025). 100 m soil landscape grids of Canada. Scientific Data, 12, 1178. <a href="https://doi.org/10.1038/s41597-025-05460-4">https://doi.org/10.1038/s41597-025-05460-4</a>. The independent provincial validation results summarized here were compiled by members of the Canadian soil mapping community. All figures were rendered by the author from the released product.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>soil mapping</category>
+  <category>predictive soil mapping</category>
+  <category>soil data</category>
+  <category>commentary</category>
+  <guid>https://yourdomain.com/posts/soil-landscape-grids-review/soil-grids-post.html</guid>
+  <pubDate>Sun, 11 Oct 2026 04:00:00 GMT</pubDate>
+  <media:content url="https://yourdomain.com/posts/soil-landscape-grids-review/contour_artifact.png" medium="image" type="image/png" height="82" width="144"/>
+</item>
 <item>
   <title>Soil Carbon Tracks the Rain: A Caution for Carbon Monitoring</title>
   <dc:creator>Preston Sorenson</dc:creator>
