@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/soc-vs-sic/soc-vs-sic-post.html",
       "/posts/soil-landscape-grids-review/soil-grids-post.html",
       "/posts/som-climate-cycles/index.html",
       "/posts/notill-carbon-sequestration/index.html",
@@ -12,6 +13,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/soc-vs-sic/soc-vs-sic-post.html",
       "/posts/soil-landscape-grids-review/soil-grids-post.html",
       "/posts/som-climate-cycles/index.html",
       "/posts/notill-carbon-sequestration/index.html",
