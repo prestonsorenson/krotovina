@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Preston Sorenson">
+<meta name="dcterms.date" content="2026-10-23">
+<meta name="keywords" content="soil carbon measurement, power analysis, minimum detectable difference, sample size, measure-remeasure, VM0042, uncertainty deduction, soil carbon MRV, MMRV, SOC monitoring, carbon credits, soil sampling design">
+<meta name="description" content="Soil carbon gains from practices like no-till and cover cropping are small and slow. Using real repeat-sample data and the VM0042 methodology, here is what it actually takes to detect a short term change in soil organic carbon.">
+
+<title>How Many Soil Samples Does It Take to Detect a Soil Carbon Change? – Krotovina Data Insights</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-445b8638c3d06994fee0907d791121c4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Krotovina Data Insights</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../services.html"> 
+<span class="menu-text">Services</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Articles</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../contact.html"> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">How Many Soil Samples Does It Take to Detect a Soil Carbon Change?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">soil carbon</div>
+    <div class="quarto-category">MMRV</div>
+    <div class="quarto-category">carbon markets</div>
+    <div class="quarto-category">soil measurement</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Soil carbon gains from practices like no-till and cover cropping are small and slow. Using real repeat-sample data and the VM0042 methodology, here is what it actually takes to detect a short term change in soil organic carbon.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Preston Sorenson </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 23, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>soil carbon measurement, power analysis, minimum detectable difference, sample size, measure-remeasure, VM0042, uncertainty deduction, soil carbon MRV, MMRV, SOC monitoring, carbon credits, soil sampling design</p>
+  </div>
+</div>
+
+</header>
+
+
+<p>Soil carbon projects are built on being able to detect a change in soil organic carbon (SOC) due to a practice change. While that may seem straightforward, consistently doing so is not always easy. SOC gains from practices like no-till and cover cropping are small, slow, and take place in a background with high spatial and temporal variation. Before committing to a measurement program, it is worth asking honestly: with a realistic number of samples, can you actually detect a change?</p>
+<p>This post works through that question using the power analysis and uncertainty rules in Verra’s VM0042 methodology, and grounds every number in real repeat-sample data from two datasets I have worked with: a Saskatchewan no-till dataset and Ontario cover cropping data.</p>
+<section id="the-formula-in-plain-terms" class="level2">
+<h2 class="anchored" data-anchor-id="the-formula-in-plain-terms">The formula, in plain terms</h2>
+<p>VM0042 includes the standard power-analysis formula for this problem. The number of samples you need is:</p>
+<p><span class="math display">\[n \geq \left(\frac{S\,(t_\alpha + t_\beta)}{MDD}\right)^2\]</span></p>
+<p>Three quantities drive it:</p>
+<ul>
+<li><strong>MDD</strong> is the minimum detectable difference: the size of SOC stock change you want to be able to detect (in Mg C/ha).</li>
+<li><strong>S</strong> is the standard deviation of the <em>change</em> in SOC stock between your two sampling times.</li>
+<li><strong>t<sub>α</sub> and t<sub>β</sub></strong> set your statistical standards: the false-positive rate (α, usually 0.05) and the power to detect a real change (usually 90%).</li>
+</ul>
+<p>Smaller changes are harder to detect, so a smaller MDD demands more samples. More variable soils are harder to measure, so a larger S demands more samples.</p>
+</section>
+<section id="s-is-the-variability-of-the-change-not-the-variability-of-the-soil" class="level2">
+<h2 class="anchored" data-anchor-id="s-is-the-variability-of-the-change-not-the-variability-of-the-soil">S is the variability of the change, not the variability of the soil</h2>
+<p>This is the single most important detail. S is <strong>not</strong> the spatial variability of soil carbon at one point in time. It is the standard deviation of the <em>difference</em> at each location between the first and second sampling.</p>
+<p>That distinction is the entire reason to resample the same locations over time rather than drawing fresh random samples each period. If you sample independent locations each time, the difference between the two surveys carries the full spatial variability of the landscape at both times: a sandy knoll measured once and a depression measured the next, differences that have nothing to do with your practice. When you return to the same georeferenced points, those large, static spatial differences subtract out, because each location is its own control. What remains in S is the genuine variation in change plus measurement and relocation error.</p>
+<p>However, it is important to remember that spatial variation is still a concern, as fine scale variation in SOC can drive significant differences at the scale of a few meters or less, which makes consistent resampling challenging.</p>
+<p>In the Saskatchewan data, the spatial standard deviation of SOC stock is roughly 16 Mg C/ha, which would put the standard deviation of an independent difference near 22 Mg C/ha. Resampling the same sites brings the standard deviation of the change down to about 9.7 Mg C/ha. Pairing more than halves the standard deviation and cuts the variance by about 80%, and because S is squared in the formula, that is a large reduction in samples. This is why VM0042 requires resample locations to be georeferenced and sampled in the same season: to preserve that pairing.</p>
+</section>
+<section id="what-real-variability-looks-like" class="level2">
+<h2 class="anchored" data-anchor-id="what-real-variability-looks-like">What real variability looks like</h2>
+<p>Here is where grounding the numbers in real data matters, because it changes the conclusion. Using the paired standard deviation of the change from each dataset:</p>
+<ul>
+<li><strong>Saskatchewan no-till (benchmark network, 0 to 30 cm): S ≈ 9.7 Mg C/ha.</strong> This is a province-wide network of no-till farms resampled over 22 years.</li>
+<li><strong>Ontario cover cropping data (0 to 15 cm): S ≈ 4.3 Mg C/ha.</strong> This comes from a controlled field study with uniform management and tight relocation, with all plots under cover-crop treatments.</li>
+</ul>
+<p>The gap between those two is consistent with what you would expect moving from a controlled experiment to a network of real farms, although the datasets also differ in region, soils, practice, and sampling depth, so it is not a clean like-for-like comparison. The practical lesson still holds: the variability you measure at a research site is likely to understate what you face across working fields, and operational projects should expect values closer to the higher number.</p>
+<p>Stratifying does less than you might hope. Within individual Saskatchewan soil zones, the paired S still ranges from about 6 to 11 Mg C/ha, so splitting the network by zone does not change the picture much.</p>
+<p>One more check matters before applying these numbers to shorter intervals. If S grew with the length of the interval, a 22-year S would overstate the noise for a 5-year measurement. In the Saskatchewan data it does not: the paired S is about 10.6 over 9 years, 8.6 over 13 years, and 9.7 over 22 years. The variability is dominated by measurement, relocation, and small-scale soil differences rather than by how long the change has been accumulating.</p>
+<p>Now put those values against expected rates of change. The forward-looking rates, based on modelling, are small:</p>
+<ul>
+<li>No-till in Saskatchewan: about 2.3 Mg C/ha of additional soil carbon over the next 75 years, or roughly 0.03 Mg C/ha per year.</li>
+<li>Cover cropping in Ontario: an effect of about 0.045 Mg C/ha per year.</li>
+</ul>
+<p>Over a five-year monitoring interval, those become changes of roughly <strong>0.15 Mg C/ha (no-till)</strong> and <strong>0.22 Mg C/ha (cover crop)</strong>. Feed them into the formula with the real S values, and the sample numbers become quite large.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="power_vs_real_rates.png" class="img-fluid figure-img"></p>
+<figcaption>Samples needed to detect a given SOC stock change, at 90% power and α = 0.05, using the paired standard deviation of the change from real repeat-sample data. Detecting the five-year signal from either practice (dashed lines) requires thousands to tens of thousands of samples.</figcaption>
+</figure>
+</div>
+<p>Detecting the five-year cover-crop effect takes on the order of <strong>3,900 samples</strong>. Detecting the five-year no-till gain takes about <strong>42,000</strong>. Sampling that much would be completely impractical.</p>
+<p>These figures also assume the simplest design: measuring change at one set of sites. If a project instead compares project sites against baseline control sites, it has to detect a difference between two groups’ changes, which roughly doubles the samples needed in each group. By the standard of a statistical test, these changes cannot be confirmed by direct measurement over a five-year window.</p>
+</section>
+<section id="precision-has-a-price-in-vm0042" class="level2">
+<h2 class="anchored" data-anchor-id="precision-has-a-price-in-vm0042">Precision has a price in VM0042</h2>
+<p>VM0042 does not actually require a project to pass that test. The methodology states that projects “are not required to take” the number of samples the power analysis suggests. What enforces precision instead is the <strong>uncertainty deduction</strong> (VM0042 Equation 74). The deduction applied to a project’s credited reductions is about 0.43 times the relative standard error of the estimate: the noisier your estimate relative to the change itself, the larger the share of credits deducted. A noisy estimate is not rejected, but it does significantly reduce the total credit value.</p>
+<p>Additionally, the risk of failing to detect a real change rises sharply at lower sample numbers, particularly when the true change is small and variability is large.</p>
+<p>That raises the next question: not “can I detect the change?” but “how much of the change will I lose to uncertainty?” Applying the Equation 74 rule (the uncertainty deduction equation) to the same five-year changes and real S values:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Five-year change</th>
+<th>Deduction reaches 100% (no credits) below</th>
+<th>50% deduction at</th>
+<th>20% deduction at</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>No-till, Saskatchewan (~0.15 Mg C/ha)</td>
+<td>~740 samples</td>
+<td>~2,970 samples</td>
+<td>~18,500 samples</td>
+</tr>
+<tr class="even">
+<td>Cover crop, Ontario (~0.22 Mg C/ha)</td>
+<td>~70 samples</td>
+<td>~280 samples</td>
+<td>~1,700 samples</td>
+</tr>
+</tbody>
+</table>
+<p>These estimates are optimistic, because they count only the sampling uncertainty in the project change. Uncertainty in the baseline and in any model used adds to the deduction. A five-year no-till measurement earns essentially nothing at any realistic sample size: below about 740 samples, the deduction consumes the entire change. A cover-crop project with a few hundred samples would earn credits, but lose around half of them to uncertainty.</p>
+<p>With few samples, there is also a real chance that the observed change comes out near zero, or even negative, purely by chance, leaving nothing to credit.</p>
+</section>
+<section id="waiting-is-the-main-practical-lever" class="level2">
+<h2 class="anchored" data-anchor-id="waiting-is-the-main-practical-lever">Waiting is the main practical lever</h2>
+<p>If sampling harder cannot rescue a five-year measurement, what can? Time. Because the cumulative change since the baseline grows as you wait while the variability stays roughly constant, the required samples fall roughly as one over the elapsed time squared. Every doubling of the time since baseline cuts the samples needed roughly fourfold.</p>
+<p>However, VM0042 requires SOC stocks to be remeasured at least every five years. Proponents need to be realistic about what is likely to be observable over a five-year period: small changes, carrying large uncertainty deductions.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="samples_vs_interval.png" class="img-fluid figure-img"></p>
+<figcaption>Samples needed as the monitoring interval lengthens, at the real paired variability for each dataset. Even waiting for SOC to accumalate, reaching a large-but-conceivable program of around 100 samples takes decades.</figcaption>
+</figure>
+</div>
+<p>The figure shows both the power and the limit of this lever. The requirement drops steeply as the interval grows. But for these slow rates and real variances, reaching even a large program of around 100 samples takes roughly <strong>three decades for the Ontario cover-crop case, and more than 50 years for the Saskatchewan no-till case</strong>. Five- and ten-year measurement intervals do not get you there. The arithmetic only works over multi-decade baselines.</p>
+</section>
+<section id="sampling-design-can-shrink-the-signal-before-you-start" class="level2">
+<h2 class="anchored" data-anchor-id="sampling-design-can-shrink-the-signal-before-you-start">Sampling design can shrink the signal before you start</h2>
+<p>Power is not the only thing a measurement program controls. Design choices can change the effective size of the signal itself, and depth is the clearest example. SOC change from surface-acting practices concentrates near the surface, while deeper layers add carbon and variance but little signal. Compositing over a deeper interval therefore dilutes the change you are trying to detect.</p>
+<p>The Saskatchewan data show this directly. The gain over 1996 to 2018 concentrates in the top 10 cm: the 0 to 10 cm layer holds about two-thirds of the 0 to 30 cm change, while carrying roughly half the variability.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="depth_dilution.png" class="img-fluid figure-img"></p>
+<figcaption>Samples needed to detect the observed SOC change by depth increment, from the Saskatchewan dataset (1996 to 2018, equivalent soil mass basis). Measuring the shallow layer, where the change concentrates, needs meaningfully fewer samples than a deeper composite.</figcaption>
+</figure>
+</div>
+<p>Measuring the 0 to 10 cm increment needs about 149 samples to detect its change; integrating down to 0 to 30 cm raises that to about 251. The deeper you composite, the more the added variance outruns the added signal. VM0042 requires reporting to at least 30 cm on an equivalent-soil-mass basis, and it permits SOC content to be measured on a single mixed sample spanning 0 to 50 cm. That is convenient, but if the change lives in the top layer, a single deep composite buries it. Measuring and analyzing by increment, rather than bulking, preserves the signal that a deep composite averages away.</p>
+</section>
+<section id="the-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="the-takeaway">The takeaway</h2>
+<p>For the slow SOC gains that no-till and cover cropping actually deliver, direct measurement over a short interval cannot reliably detect the change, and under VM0042 the resulting uncertainty deduction will consume most or all of the credits. That leaves three options: wait decades for the signal to accumulate, use a well-validated model with periodic measurement to true it up, or accept a large uncertainty deduction on whatever you measure. VM0042 provides for all three, and the model-based pathway exists precisely because short-interval measurement cannot consistently detect SOC stock changes without an impractically large number of samples.</p>
+<p>None of this is an argument against building soil carbon. The gains are real and worth pursuing. It is an argument for being realistic about what measurement can and cannot confirm on the timescales that projects operate on, and for designing monitoring (the interval, the depth, the pairing, and the stratification) around that reality.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/yourdomain\.com");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
