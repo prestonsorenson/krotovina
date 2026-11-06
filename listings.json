@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/canola-seeding-dates/index.html",
       "/posts/detecting-soil-carbon-change/detecting-soil-carbon-change.html",
       "/posts/soc-vs-sic/soc-vs-sic-post.html",
       "/posts/soil-landscape-grids-review/soil-grids-post.html",
@@ -14,6 +15,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/canola-seeding-dates/index.html",
       "/posts/detecting-soil-carbon-change/detecting-soil-carbon-change.html",
       "/posts/soc-vs-sic/soc-vs-sic-post.html",
       "/posts/soil-landscape-grids-review/soil-grids-post.html",

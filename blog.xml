@@ -10,7 +10,211 @@
 <atom:link href="https://yourdomain.com/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Fri, 23 Oct 2026 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 06 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Can Earlier Seeding Help Reduce Canola Heat Stress Losses?</title>
+  <dc:creator>Preston Sorenson</dc:creator>
+  <link>https://yourdomain.com/posts/canola-seeding-dates/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>In my <a href="../canola-climate-scenarios/canola-climate-post.html">previous article</a>, I showed that canola yields in Saskatchewan are sensitive to temperature, and that hotter Julys are likely to cut yields by mid-century. Heat during flowering is the main driver, as hot days cause flower blast and pod abortion.</p>
+<p>The Canola Council of Canada already recommends early seeding partly for this reason. Early-seeded canola tends to flower before peak summer heat, and late April to mid-May is generally considered early, depending on the region (<a href="https://www.canolacouncil.org/canola-encyclopedia/plant-establishment/time-of-seeding/">Canola Encyclopedia, Time of seeding</a>). The question for this article is whether earlier seeding can help avoid some of these losses.</p>
+<section id="july-is-getting-hotter" class="level2">
+<h2 class="anchored" data-anchor-id="july-is-getting-hotter">July is getting hotter</h2>
+<p>Across six locations in Saskatchewan, the 26-model ensemble under a moderate emissions scenario (SSP2-4.5) projects mean July daily maximum temperatures rising by roughly 3.5 to 4°C by 2071 to 2100, compared with 1991 to 2020. The number of July days above 30°C roughly doubles to quadruples. At Saskatoon, for example, it rises from about 6 days to about 16; at Melfort, from about 3 to about 12.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/canola-seeding-dates/fig3a_july_tmax.png" class="img-fluid figure-img"></p>
+<figcaption>July mean daily maximum temperature at six Saskatchewan locations, SSP2-4.5. Lines are the median across 26 CanDCS-M6 climate models. Bands show the 10th to 90th percentile across models. Shading marks the three analysis periods.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/canola-seeding-dates/fig3b_july_hot_days.png" class="img-fluid figure-img"></p>
+<figcaption>Number of July days above 30°C at the same locations. Lines and bands as above.</figcaption>
+</figure>
+</div>
+</section>
+<section id="how-the-analysis-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-the-analysis-works">How the analysis works</h2>
+<p>For each location, climate model, year, and seeding date, I simulated the canola season using daily temperatures from the CanDCS-M6 downscaled climate projections:</p>
+<ul>
+<li><strong>Seeding dates:</strong> weekly from April 15 to June 10, with May 13 as the reference for current practice.</li>
+<li><strong>Flowering:</strong> predicted from growing degree days (base 0°C) accumulated from seeding, with flowering starting at 624 degree days (Miller et al.&nbsp;2001).</li>
+<li><strong>Heat stress:</strong> each day above 30°C during the first 14 days of flowering reduces yield by about 1.69%, based on Kutcher et al.&nbsp;(2010).</li>
+<li><strong>Spring frost:</strong> a seeding date is counted as affected if temperatures fall to −3°C or below while seedlings are establishing (7 to 28 days after seeding).</li>
+<li><strong>Fall frost:</strong> a seeding date is counted as having a fall frost risk if a killing frost (−2°C) arrives before the crop reaches maturity.</li>
+<li><strong>Acceptable risk:</strong> a seeding date is assumed to be feasible if both spring and fall frost occur in no more than 1 year in 5. This is an assumed risk tolerance. Producers with lower risk tolerance would need to seed later.</li>
+</ul>
+<p>The best seeding date at each location is the feasible date with the lowest heat-stress loss. Results are the median across the 26 climate models.</p>
+</section>
+<section id="earlier-seeding-consistently-reduces-heat-stress" class="level2">
+<h2 class="anchored" data-anchor-id="earlier-seeding-consistently-reduces-heat-stress">Earlier seeding consistently reduces heat stress</h2>
+<p>At every location and in every period, heat-stress loss rises steadily with later seeding. Earlier-seeded canola flowers earlier, before the hottest part of July.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/canola-seeding-dates/fig1_loss_by_seeding_date.png" class="img-fluid figure-img"></p>
+<figcaption>Flowering heat-stress yield loss by seeding date at six Saskatchewan locations, SSP2-4.5. Lines are the ensemble median and bands the 10th to 90th percentile across 26 climate models. Crosses mark dates where spring or fall frost risk exceeds 1 year in 5; circles mark the lowest-loss date within frost limits.</figcaption>
+</figure>
+</div>
+<p>With seeding held at mid-May, heat-stress loss rises from about rises from about 2 to 4.5% today to about 6 to 8.5% by 2071 to 2100, depending on location. Shifting seeding one to two weeks earlier reduces that increase, but earlier seeding does not completely mitigate the increased heat stress.</p>
+</section>
+<section id="spring-frost-sets-how-early-you-can-go" class="level2">
+<h2 class="anchored" data-anchor-id="spring-frost-sets-how-early-you-can-go">Spring frost sets how early you can go</h2>
+<p>Because heat loss keeps falling the earlier you seed, the limit on early seeding is frost risk.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/canola-seeding-dates/fig2_seeding_frost_risk.png" class="img-fluid figure-img"></p>
+<figcaption>Share of years with spring frost on seedlings, by seeding date, at six Saskatchewan locations under SSP2-4.5. The dashed line marks the 1-in-5 risk tolerance.</figcaption>
+</figure>
+</div>
+<p>As springs warm, frost risk on seedlings declines, and the window for safe early seeding opens about one to two weeks earlier than today. Fall frost before maturity is not a constraint for any seeding date tested, except very late seeding under today’s climate.</p>
+<p>How far the window opens depends on location. In the west and south, April 29 becomes feasible by mid-century. In the northeast, spring frost risk stays higher, so the best date only moves to May 6.</p>
+</section>
+<section id="how-much-of-the-added-heat-loss-can-earlier-seeding-offset" class="level2">
+<h2 class="anchored" data-anchor-id="how-much-of-the-added-heat-loss-can-earlier-seeding-offset">How much of the added heat loss can earlier seeding offset?</h2>
+<p>The benefit varies widely across the province:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Location</th>
+<th>Soil zone</th>
+<th>Best seeding date (2071–2100)</th>
+<th>Added heat loss offset</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Swift Current</td>
+<td>Brown</td>
+<td>Apr 29</td>
+<td>~61%</td>
+</tr>
+<tr class="even">
+<td>Kindersley</td>
+<td>Brown</td>
+<td>Apr 29</td>
+<td>~53%</td>
+</tr>
+<tr class="odd">
+<td>Saskatoon</td>
+<td>Dark Brown</td>
+<td>Apr 29</td>
+<td>~46%</td>
+</tr>
+<tr class="even">
+<td>Regina</td>
+<td>Dark Brown</td>
+<td>May 6</td>
+<td>~34%</td>
+</tr>
+<tr class="odd">
+<td>Yorkton</td>
+<td>Black</td>
+<td>May 6</td>
+<td>~27%</td>
+</tr>
+<tr class="even">
+<td>Melfort</td>
+<td>Black</td>
+<td>May 6</td>
+<td>~25%</td>
+</tr>
+</tbody>
+</table>
+<p>Earlier seeding offsets about half or more of the added heat loss in the Brown and Dark Brown zones, but only about a quarter in the northeast, where spring frost limits how early producers can seed. This matches current practice. Late April seeding is already fairly common in the Brown and Dark Brown zones, and less so in the Black zone (<a href="https://www.canolacouncil.org/canola-encyclopedia/plant-establishment/time-of-seeding/">Canola Encyclopedia</a>).</p>
+</section>
+<section id="what-its-worth" class="level2">
+<h2 class="anchored" data-anchor-id="what-its-worth">What it’s worth</h2>
+<p>To put the avoided heat-stress loss in economic terms, I applied the <a href="https://www.saskatchewan.ca/crops">2026 Saskatchewan Crop Planning Guide</a>’s canola price of $13.20/bu and its yields by soil zone, using the provincial average yield as the low end and the guide’s target yield as the high end.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Location</th>
+<th>Soil zone</th>
+<th>2041–2070 ($/ac)</th>
+<th>2071–2100 ($/ac)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Swift Current</td>
+<td>Brown</td>
+<td>5–8</td>
+<td>7–11</td>
+</tr>
+<tr class="even">
+<td>Kindersley</td>
+<td>Brown</td>
+<td>5–7</td>
+<td>8–11</td>
+</tr>
+<tr class="odd">
+<td>Saskatoon</td>
+<td>Dark Brown</td>
+<td>6–9</td>
+<td>9–13</td>
+</tr>
+<tr class="even">
+<td>Regina</td>
+<td>Dark Brown</td>
+<td>3–5</td>
+<td>4–6</td>
+</tr>
+<tr class="odd">
+<td>Yorkton</td>
+<td>Black</td>
+<td>3–4</td>
+<td>5–6</td>
+</tr>
+<tr class="even">
+<td>Melfort</td>
+<td>Black</td>
+<td>3–4</td>
+<td>4–5</td>
+</tr>
+</tbody>
+</table>
+<p>By 2071 to 2100, seeding at the earliest frost-feasible date is worth roughly $9 to $13 per acre at Saskatoon, $7 to $11 at Swift Current and Kindersley, and $4 to $6 at Regina, Yorkton, and Melfort. At the high end, that’s about $2,000 per quarter section.</p>
+<p>These estimates use today’s prices and yields, and they don’t include the added costs of early seeding, such as earlier flea beetle control or higher seeding rates to offset seedling mortality in cool soils. They count only the reduction in flowering heat stress. The range across climate models is also wide: at Saskatoon in 2071 to 2100, the benefit at target yield ranges from about $3 to $22 per acre between the 10th and 90th percentile of models.</p>
+<p>Scaled to Saskatchewan’s roughly 12 million acres of canola, earlier seeding would be worth on the order of $50 to $75 million per year by mid-century and $75 to $105 million per year by late century, based on today’s prices and acreage. This assumes the six locations are representative of the province’s canola area. Because much of that area is in the Black soil zone, where the benefit is smallest, the true figure is likely toward the lower end of this range.</p>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<ul>
+<li><strong>Soil temperature and field conditions are not modelled.</strong> The Canola Council of Canada recommends seeding when seed-zone soil temperatures average at least 4 to 5°C, and cold soils after early seeding can slow emergence and increase seedling mortality. Field trafficability, spring moisture, and pre-seed weed control also limit how early producers can seed. The earliest frost-feasible dates here should be read as an upper bound on how early seeding could shift, not as a recommended date for every field and year.</li>
+<li><strong>The loss estimate covers flowering heat stress only.</strong> It does not include drought, warm nights, disease, or the other yield effects of seeding date, so it is a heat-stress index rather than a full yield forecast.</li>
+<li><strong>One emissions scenario.</strong> Results are for SSP2-4.5, a middle-of-the-road scenario. Higher emissions would increase both the heat losses and the value of adapting.</li>
+<li><strong>The best date is chosen conservatively.</strong> Where several dates give nearly the same loss, the date closest to current practice is reported, which slightly understates the benefit at some locations.</li>
+</ul>
+</section>
+<section id="the-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="the-takeaway">The takeaway</h2>
+<p>Earlier seeding is a real, low-cost adaptation, and climate change is making earlier seeding possible as springs warm. Early seeding will be worth the most in the Brown and Dark Brown zones, where it can offset about half of the added heat stress by late century. But it closes only part of the gap everywhere, and in the northeast, spring frost limits how much it can help. Continued investment in breeding for heat tolerance will be needed alongside adjusted seeding dates.</p>
+<hr>
+<p><em>Methods and data: CanDCS-M6 downscaled CMIP6 projections (26 models, SSP2-4.5); flowering phenology from Miller et al.&nbsp;(2001); heat-stress yield relationship from Kutcher, H.R., Warland, J.S., &amp; Brandt, S.A. (2010), Temperature and precipitation effects on canola yields in Saskatchewan, Canada, Agricultural and Forest Meteorology, 150(2), 161–165; economics from the Saskatchewan Ministry of Agriculture 2026 Crop Planning Guide. This analysis builds on Sorenson, P.T., Mood, B., &amp; Shirtliffe, S. (2025), Future canola yields under different climate scenarios in Saskatchewan, Canada, FACETS, <a href="https://doi.org/10.1139/facets-2025-0121">https://doi.org/10.1139/facets-2025-0121</a>.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>climate risk</category>
+  <category>canola</category>
+  <category>climate scenarios</category>
+  <category>crop yield</category>
+  <guid>https://yourdomain.com/posts/canola-seeding-dates/</guid>
+  <pubDate>Fri, 06 Nov 2026 05:00:00 GMT</pubDate>
+  <media:content url="https://yourdomain.com/posts/canola-seeding-dates/fig1_loss_by_seeding_date.png" medium="image" type="image/png" height="101" width="144"/>
+</item>
 <item>
   <title>How Many Soil Samples Does It Take to Detect a Soil Carbon Change?</title>
   <dc:creator>Preston Sorenson</dc:creator>
