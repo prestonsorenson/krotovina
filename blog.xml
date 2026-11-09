@@ -10,7 +10,141 @@
 <atom:link href="https://yourdomain.com/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Fri, 06 Nov 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 09 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>How Many Samples Does It Take to Map a Contaminated Soil Plume Accurately?</title>
+  <dc:creator>Preston Sorenson</dc:creator>
+  <link>https://yourdomain.com/posts/plume-sampling/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Every contaminated site assessment rests on a sampling plan, and every sampling plan involves a trade-off. Each sample costs money, but a plume mapped from too few samples leads to remediating the wrong volume of soil: digging up clean soil that didn’t need to move, or leaving contamination behind. A review by the Government of Alberta found that 28% of contaminated site assessments failed regulatory audits (Polet and Powter 2012).</p>
+<p>A few years ago, I set out to quantify that trade-off. How accurately can a soil contaminant plume be mapped from a given number of samples, and what number of samples minimizes total project cost? This article summarizes that work, published in the <em>Canadian Journal of Soil Science</em> (Sorenson, McCormick, and Dyck 2019), with new interactive visualizations.</p>
+<section id="the-approach" class="level2">
+<h2 class="anchored" data-anchor-id="the-approach">The approach</h2>
+<p>Real sites rarely have enough data to know the true extent of a plume, so the study used simulation. Each run of the model:</p>
+<ol type="1">
+<li>Generated a random three-dimensional contaminant plume from randomly placed hotspots, with concentrations above the 1,300 ppm Alberta Tier 1 guideline for F3 petroleum hydrocarbons in fine-textured agricultural soil.</li>
+<li>Sampled that plume on a regular grid, with spacing from 10% to 50% of the site extent on each axis, giving about 25 to 2,800 samples.</li>
+<li>Mapped the plume from those samples using a random forest model with spatial distance predictors.</li>
+<li>Compared the mapped volume above the guideline with the true volume.</li>
+</ol>
+<p>Repeating this 10,000 times at each of nine sampling intensities gave 90,000 simulations, each with a unique plume. Because every plume is different, the results describe what to expect when you don’t know the plume’s size and shape in advance, which is the usual situation at the start of an assessment.</p>
+</section>
+<section id="what-sampling-intensity-looks-like" class="level2">
+<h2 class="anchored" data-anchor-id="what-sampling-intensity-looks-like">What sampling intensity looks like</h2>
+<p>The plot below shows the same simulated plume, about 9,500 m³, mapped from three sampling grids. Use the buttons to switch between sampling densities. Grey cells are mapped correctly, blue cells are contamination the map missed, red cells are clean soil mapped as contaminated, and black diamonds are sample locations. The plot can be rotated and zoomed. This plume was chosen because its errors are close to the study’s averages, so it’s a typical case rather than an unusually easy or hard one.</p>
+<iframe src="plume_comparison.html" width="100%" height="600" style="border:none;">
+</iframe>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Samples</th>
+<th>Volume error</th>
+<th>Volume in the wrong place</th>
+<th>Missed contamination</th>
+<th>Clean soil mapped as contaminated</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>64</td>
+<td>20%</td>
+<td>36%</td>
+<td>786 m³</td>
+<td>2,649 m³</td>
+</tr>
+<tr class="even">
+<td>343</td>
+<td>13%</td>
+<td>21%</td>
+<td>361 m³</td>
+<td>1,597 m³</td>
+</tr>
+<tr class="odd">
+<td>1,331</td>
+<td>7%</td>
+<td>11%</td>
+<td>196 m³</td>
+<td>854 m³</td>
+</tr>
+</tbody>
+</table>
+<p>Three things stand out. First, the volume error understates how wrong the map is. With 64 samples, the total volume is off by 20%, but more than a third of the plume is in the wrong place, because over- and under-prediction partly cancel out. A map can get roughly the right volume and still direct excavation to the wrong areas. Second, most of the error here is clean soil mapped as contaminated, which translates directly into unnecessary excavation and disposal. Third, the errors are concentrated at the edges of the plume, not spread evenly through it. That is an argument for adding samples where the boundary is uncertain, rather than only tightening the grid everywhere.</p>
+</section>
+<section id="accuracy-across-90000-plumes" class="level2">
+<h2 class="anchored" data-anchor-id="accuracy-across-90000-plumes">Accuracy across 90,000 plumes</h2>
+<p>Across all simulations, average error in plume volume fell from 57% with about 25 samples to 5% with about 2,800. The spread matters as much as the average: with about 25 samples, the 90th percentile error was 100%, meaning one plume in ten was mapped with an error as large as the plume itself. The study’s conclusion was that collecting fewer than 25 samples gives low confidence in plume characterization.</p>
+<p>The spread reflects the plumes themselves. Large, uniform plumes can be mapped well with relatively few samples, while small, patchy plumes need many more. In an earlier test run while preparing this article, a large, uniform plume was mapped to within a few percent with only 64 samples. The difficulty is that you rarely know in advance which kind of plume a site has.</p>
+</section>
+<section id="the-economics-how-many-samples-is-optimal" class="level2">
+<h2 class="anchored" data-anchor-id="the-economics-how-many-samples-is-optimal">The economics: how many samples is optimal?</h2>
+<p>Collecting more samples costs more, but so does remediating the wrong volume of soil. The study found the number of samples that minimizes the combined cost, assuming $120 per cubic metre for over- or under-remediation (the average remediation cost reported by Alberta’s Orphan Well Association at the time).</p>
+<p>The optimal number depends on plume size and the cost per sample. In the study, conventional laboratory analysis was priced at $50 to $100 per sample. The table below uses the midpoint, $75 per sample.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Plume volume</th>
+<th>Optimal number of samples</th>
+<th>Total cost</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>100 m³</td>
+<td>30</td>
+<td>$7,309</td>
+</tr>
+<tr class="even">
+<td>1,000 m³</td>
+<td>148</td>
+<td>$35,334</td>
+</tr>
+<tr class="odd">
+<td>10,000 m³</td>
+<td>718</td>
+<td>$170,812</td>
+</tr>
+</tbody>
+</table>
+<p>Based on this analysis, the cost-optimal number of samples for a moderately sized plume is in the hundreds.</p>
+<p>These costs reflect prices at the time of the study and exclude field collection costs. The pattern, not the specific dollar values, is the main point.</p>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<ul>
+<li><strong>Simulated plumes.</strong> The results come from simulation and have not yet been validated against field data. Real plumes have structure, such as preferential flow paths and soil layering, that random simulations don’t capture.</li>
+<li><strong>One connected plume of known location.</strong> The study did not address finding a small plume at an unknown location within a larger area, or sites with several disconnected plumes. Both would likely require more samples.</li>
+<li><strong>Simplified geometry.</strong> Depth was simulated at the same scale as horizontal distance and rescaled for display. Real assessments should account for differences in horizontal and vertical variability.</li>
+<li><strong>2019 prices.</strong> Laboratory and remediation costs have changed since the study.</li>
+</ul>
+</section>
+<section id="the-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="the-takeaway">The takeaway</h2>
+<p>Without prior knowledge of a plume’s size and shape, practitioners should expect to need hundreds of samples, not dozens, to characterize it reliably. Too few samples doesn’t just add uncertainty to the volume estimate; it puts excavation in the wrong places.</p>
+<hr>
+<p><em>Source: Sorenson, P.T., McCormick, S., and Dyck, M. (2019). Soil contamination sampling intensity: determining accuracy and confidence using a Monte Carlo simulation. Canadian Journal of Soil Science, 99, 254–261. <a href="https://doi.org/10.1139/cjss-2019-0001">https://doi.org/10.1139/cjss-2019-0001</a>. Licensed CC BY 4.0. The interactive plots were generated for this article following the published method.</em></p>
+
+
+</section>
+
+ ]]></description>
+  <category>contaminated sites</category>
+  <category>soil data</category>
+  <category>soil measurement</category>
+  <guid>https://yourdomain.com/posts/plume-sampling/</guid>
+  <pubDate>Mon, 09 Nov 2026 05:00:00 GMT</pubDate>
+  <media:content url="https://yourdomain.com/posts/plume-sampling/plume_sparse.png" medium="image" type="image/png"/>
+</item>
 <item>
   <title>Can Earlier Seeding Help Reduce Canola Heat Stress Losses?</title>
   <dc:creator>Preston Sorenson</dc:creator>
