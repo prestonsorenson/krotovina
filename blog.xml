@@ -143,7 +143,7 @@
   <category>soil measurement</category>
   <guid>https://yourdomain.com/posts/plume-sampling/</guid>
   <pubDate>Mon, 09 Nov 2026 05:00:00 GMT</pubDate>
-  <media:content url="https://yourdomain.com/posts/plume-sampling/plume_sparse.png" medium="image" type="image/png"/>
+  <media:content url="https://yourdomain.com/posts/plume-sampling/plume_sparse.png" medium="image" type="image/png" height="136" width="144"/>
 </item>
 <item>
   <title>Can Earlier Seeding Help Reduce Canola Heat Stress Losses?</title>
