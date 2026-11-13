@@ -10,7 +10,1238 @@
 <atom:link href="https://yourdomain.com/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.10.18</generator>
-<lastBuildDate>Mon, 09 Nov 2026 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 13 Nov 2026 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Fixed Depth vs Equivalent Soil Mass: Why Soil Carbon Stocks Need a Common Reference Mass</title>
+  <dc:creator>Preston Sorenson</dc:creator>
+  <link>https://yourdomain.com/posts/fixed-depth-vs-esm/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Soil carbon stocks have traditionally been reported to a fixed depth: Mg of carbon per hectare in the top 30 cm, for example. It seems like the obvious way to compare two sampling times, or two management practices. But a fixed depth doesn’t contain a fixed amount of soil. If bulk density changes between sampling events, the same 30 cm holds a different mass of soil, and comparing stocks at a fixed depth mixes a change in carbon with a change in bulk density.</p>
+<p>That’s why the equivalent soil mass (ESM) approach has become the recommended standard for measuring soil carbon change (von Haden et al.&nbsp;2020), and why carbon protocols such as Verra’s VM0042 require it. This article explains the concept, then works through an example using real Saskatchewan data from the Prairie Soil Carbon Balance (PSCB) report, with R code to calculate ESM stocks.</p>
+<section id="why-fixed-depth-can-mislead" class="level2">
+<h2 class="anchored" data-anchor-id="why-fixed-depth-can-mislead">Why fixed depth can mislead</h2>
+<p>A soil carbon stock to a given depth is the product of three things:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%5Ctext%7BSOC%20stock%20(Mg%20C/ha)%7D%20=%20%5Ctext%7BSOC%20(%5C%25)%7D%20%5Ctimes%20%5Ctext%7Bbulk%20density%20(g/cm%7D%5E3%5Ctext%7B)%7D%20%5Ctimes%20%5Ctext%7Bdepth%20(cm)%7D"></p>
+<p>The bulk density term is the potentially confounding factor. Management can change bulk density along with SOC. Tillage activities, compaction from equipment traffic, and changes in organic matter all can shift bulk density.</p>
+<p>For example, a field can see an increase in bulk density due to repeat equipment traffic over time. Sampling to 30 cm before and after compaction captures more soil mass the second time, because the same depth is denser. Even if carbon concentrations barely changed, the fixed-depth stock goes up, simply because there is more soil in the sample. The reverse happens when bulk density decreases, for example as soil gains organic matter: a fixed-depth comparison can understate a real gain, or even show a loss that is really a drop in bulk density.</p>
+<p>The equivalent soil mass approach removes this effect by comparing carbon in the same mass of soil at each sampling time, rather than the same depth.</p>
+</section>
+<section id="a-worked-example-with-prairie-farm-data" class="level2">
+<h2 class="anchored" data-anchor-id="a-worked-example-with-prairie-farm-data">A worked example with Prairie farm data</h2>
+<p>The Prairie Soil Carbon Balance (PSCB) project has monitored soil carbon on commercial farm fields across Saskatchewan since 1996, after the fields converted to direct seeding (McConkey 2019). Each benchmark was sampled to 40 cm in 10 cm increments, with bulk density measured at every sampling. The project’s 2019 report gives the network-average bulk density and organic carbon concentration by layer for the 88 fields sampled in both 1996 and 2018 (Table 4 of the report).</p>
+<p>Those averages make a useful example. Between 1996 and 2018, bulk density increased significantly at every depth.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">profiles <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb1-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">time   =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1996"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2018"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>),</span>
+<span id="cb1-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">top    =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>),          <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cm</span></span>
+<span id="cb1-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bottom =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">40</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>),         <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cm</span></span>
+<span id="cb1-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bd     =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.261</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.421</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.408</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.382</span>,      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># bulk density, g/cm3</span></span>
+<span id="cb1-6">             <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.440</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.493</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.492</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.497</span>),</span>
+<span id="cb1-7">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">soc    =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.122</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.376</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.054</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.955</span>,      <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># soil organic carbon, %</span></span>
+<span id="cb1-8">             <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.189</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.289</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.045</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.961</span>)</span>
+<span id="cb1-9">)</span>
+<span id="cb1-10"></span>
+<span id="cb1-11">profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thickness <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>bottom <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>top        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cm</span></span>
+<span id="cb1-12">profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass      <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>bd <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>thickness <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span> <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># soil mass, Mg/ha</span></span>
+<span id="cb1-13">profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># SOC stock, Mg C/ha</span></span>
+<span id="cb1-14"></span>
+<span id="cb1-15">profiles</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  time top bottom    bd   soc thickness mass soc_stock
+1 1996   0     10 1.261 2.122        10 1261  26.75842
+2 1996  10     20 1.421 1.376        10 1421  19.55296
+3 1996  20     30 1.408 1.054        10 1408  14.84032
+4 1996  30     40 1.382 0.955        10 1382  13.19810
+5 2018   0     10 1.440 2.189        10 1440  31.52160
+6 2018  10     20 1.493 1.289        10 1493  19.24477
+7 2018  20     30 1.492 1.045        10 1492  15.59140
+8 2018  30     40 1.497 0.961        10 1497  14.38617</code></pre>
+</div>
+</div>
+<p>Soil mass for each layer is bulk density times thickness, converted to Mg per hectare. The SOC stock is the SOC fraction times that mass.</p>
+<section id="fixed-depth-stocks" class="level3">
+<h3 class="anchored" data-anchor-id="fixed-depth-stocks">Fixed-depth stocks</h3>
+<p>Summing the layers to 30 cm gives the fixed-depth stock in each year:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1">top30 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> profiles[profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>bottom <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, ]</span>
+<span id="cb3-2">fixed <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aggregate</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cbind</span>(mass, soc_stock) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> time, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> top30, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">FUN =</span> sum)</span>
+<span id="cb3-3">fixed</span></code></pre></div></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  time mass soc_stock
+1 1996 4090  61.15170
+2 2018 4425  66.35777</code></pre>
+</div>
+</div>
+<p>On a fixed-depth basis, the 0 to 30 cm stock rises from 61.2 to 66.4 Mg C/ha, an apparent gain of about 5.2 Mg C/ha. But the soil mass in the top 30 cm also rose, from 4,090 to 4,425 Mg/ha. About 8% more soil is in the same 30 cm.</p>
+</section>
+<section id="equivalent-soil-mass-stocks" class="level3">
+<h3 class="anchored" data-anchor-id="equivalent-soil-mass-stocks">Equivalent soil mass stocks</h3>
+<p>The ESM approach picks a reference soil mass and calculates the carbon in that mass at each time. Here the reference is the 1996 soil mass to 30 cm: 4,090 Mg/ha.</p>
+<p>To find the carbon in the first 4,090 Mg/ha of soil in 2018, we build the cumulative relationship between soil mass and carbon through the profile, then interpolate it at the reference mass using a monotone cubic spline, following Wendt and Hauser (2013) and von Haden et al.&nbsp;(2020). Because the profile was sampled to 40 cm, the reference mass falls within the sampled soil in both years. Extrapolating to reference mass values outside the sample range should be avoided, as that increases the uncertainty of the results.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1">esm_stock <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(mass, soc_stock, ref_mass, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"spline"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"linear"</span>)) {</span>
+<span id="cb5-2">  method   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">match.arg</span>(method)</span>
+<span id="cb5-3">  cum_mass <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cumsum</span>(mass))        <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cumulative soil mass from the surface</span></span>
+<span id="cb5-4">  cum_soc  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cumsum</span>(soc_stock))   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cumulative SOC from the surface</span></span>
+<span id="cb5-5">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (ref_mass <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&gt;</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">max</span>(cum_mass)) {</span>
+<span id="cb5-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">stop</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Reference mass exceeds the sampled soil mass: sample deeper."</span>)</span>
+<span id="cb5-7">  }</span>
+<span id="cb5-8">  <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (method <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"spline"</span>) {</span>
+<span id="cb5-9">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># monotone cubic spline: cumulative SOC can only increase with soil mass</span></span>
+<span id="cb5-10">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">splinefun</span>(cum_mass, cum_soc, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">method =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"hyman"</span>)(ref_mass)</span>
+<span id="cb5-11">  } <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">else</span> {</span>
+<span id="cb5-12">    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># linear interpolation, equivalent to Ellert and Bettany (1995)</span></span>
+<span id="cb5-13">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">approx</span>(cum_mass, cum_soc, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xout =</span> ref_mass)<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>y</span>
+<span id="cb5-14">  }</span>
+<span id="cb5-15">}</span>
+<span id="cb5-16"></span>
+<span id="cb5-17">ref_mass <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(top30<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass[top30<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1996"</span>])   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># 4,090 Mg/ha</span></span>
+<span id="cb5-18"></span>
+<span id="cb5-19">esm <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">split</span>(profiles, profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time), <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p) {</span>
+<span id="cb5-20">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">esm_spline =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">esm_stock</span>(p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass, p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock, ref_mass, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"spline"</span>),</span>
+<span id="cb5-21">    <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">esm_linear =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">esm_stock</span>(p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass, p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock, ref_mass, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"linear"</span>))</span>
+<span id="cb5-22">})</span>
+<span id="cb5-23"></span>
+<span id="cb5-24">results <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">year        =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(esm),</span>
+<span id="cb5-25">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fixed_depth =</span> fixed<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">match</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">colnames</span>(esm), fixed<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time)],</span>
+<span id="cb5-26">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">esm_spline  =</span> esm[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"esm_spline"</span>, ],</span>
+<span id="cb5-27">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">esm_linear  =</span> esm[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"esm_linear"</span>, ],</span>
+<span id="cb5-28">                      <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">row.names =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>)</span>
+<span id="cb5-29">knitr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(results, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">digits =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>,</span>
+<span id="cb5-30">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.names =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Year"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fixed depth (0-30 cm)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ESM (spline)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ESM (linear)"</span>))</span></code></pre></div></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Year</th>
+<th style="text-align: right;">Fixed depth (0-30 cm)</th>
+<th style="text-align: right;">ESM (spline)</th>
+<th style="text-align: right;">ESM (linear)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1996</td>
+<td style="text-align: right;">61.2</td>
+<td style="text-align: right;">61.2</td>
+<td style="text-align: right;">61.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2018</td>
+<td style="text-align: right;">66.4</td>
+<td style="text-align: right;">63.0</td>
+<td style="text-align: right;">62.9</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Change in each estimate, and the ESM change using the average mass as reference</span></span>
+<span id="cb6-2">chg_fixed  <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">diff</span>(fixed<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">match</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1996"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2018"</span>), fixed<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time)])</span>
+<span id="cb6-3">chg_spline <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> esm[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"esm_spline"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2018"</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> esm[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"esm_spline"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1996"</span>]</span>
+<span id="cb6-4">chg_linear <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> esm[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"esm_linear"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2018"</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> esm[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"esm_linear"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1996"</span>]</span>
+<span id="cb6-5">ref_avg    <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">mean</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">tapply</span>(top30<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass, top30<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time, sum))</span>
+<span id="cb6-6">esm_avg    <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sapply</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">split</span>(profiles, profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time),</span>
+<span id="cb6-7">                     <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">esm_stock</span>(p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass, p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock, ref_avg))</span>
+<span id="cb6-8">chg_avg    <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> esm_avg[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2018"</span>] <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> esm_avg[<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1996"</span>]</span></code></pre></div></div>
+</div>
+<p>On an equivalent mass basis, the 2018 stock is about 63 Mg C/ha, so the change is about 1.8 Mg C/ha, compared with the 5.2 Mg C/ha a fixed-depth comparison suggests. Linear interpolation gives a similar change of 1.7 Mg C/ha. The difference is the carbon in the extra 335 Mg/ha of soil that the denser 2018 soil packs into the top 30 cm.</p>
+<p>The choice of reference mass matters. Using the average of the 1996 and 2018 masses, as the PSCB report did, gives a change of about 1.9 Mg C/ha. The report’s own ESM analysis, calculated site by site rather than from network averages, found a gain of 2.41 Mg C/ha for 0 to 30 cm (its Table 5). All of these are far below the fixed-depth estimate.</p>
+<p>The plot shows what the calculation is doing. Each line is cumulative carbon against cumulative soil mass down the profile. The fixed-depth comparison reads each line at 30 cm, where the two years hold different amounts of soil. The ESM comparison reads both lines at the same soil mass.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">library</span>(ggplot2)</span>
+<span id="cb7-2"></span>
+<span id="cb7-3">cum <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">do.call</span>(rbind, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lapply</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">split</span>(profiles, profiles<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time), <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p) {</span>
+<span id="cb7-4">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">time =</span> p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>],</span>
+<span id="cb7-5">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cum_mass =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cumsum</span>(p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass)),</span>
+<span id="cb7-6">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">cum_soc  =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">cumsum</span>(p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock)))</span>
+<span id="cb7-7">}))</span>
+<span id="cb7-8"></span>
+<span id="cb7-9">p_esm <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">ggplot</span>(cum, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aes</span>(cum_mass, cum_soc, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> time)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-10">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_line</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linewidth =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-11">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_point</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">size =</span> <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.5</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-12">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">geom_vline</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">xintercept =</span> ref_mass, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">linetype =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"dashed"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"grey40"</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-13">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scale_colour_manual</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">values =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"1996"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#2c7fb8"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"2018"</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">=</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"#d7301f"</span>)) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-14">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">labs</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">x =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cumulative soil mass (Mg/ha)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">y =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Cumulative SOC (Mg C/ha)"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">colour =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">NULL</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-15">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme_bw</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">base_size =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">14</span>) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">+</span></span>
+<span id="cb7-16">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">theme</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">legend.position =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"bottom"</span>)</span>
+<span id="cb7-17">p_esm</span></code></pre></div></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://yourdomain.com/posts/fixed-depth-vs-esm/index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cumulative SOC against cumulative soil mass for the PSCB network averages in 1996 and 2018. The dashed line marks the reference soil mass (the 1996 mass to 30 cm). Points mark the 10 cm layer boundaries.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>One caveat applies to this example: multiplying average bulk density by average carbon concentration isn’t exactly the same as averaging each field’s stock, which is one reason these numbers differ from the report’s site-by-site results. The reports average SOC stock gains are more accurate. The report’s SOC stock gains, calculated site by site, are more accurate. The data in this post are just to illustrate the calculations and how they affect the results.</p>
+</section>
+</section>
+<section id="linear-or-spline-interpolation" class="level2">
+<h2 class="anchored" data-anchor-id="linear-or-spline-interpolation">Linear or spline interpolation?</h2>
+<p>The function above uses a cubic spline by default, with linear interpolation available for comparison. The two methods make different assumptions about how carbon is distributed within each sampled layer.</p>
+<ul>
+<li><strong>Linear interpolation</strong> assumes carbon relationship with depth is strictly linear. It gives the same answer as the classic correction of Ellert and Bettany (1995), which removes the excess soil mass from the deepest layer at that layer’s carbon concentration. It’s simple and transparent.</li>
+<li><strong>Cubic spline interpolation</strong>, used by Wendt and Hauser (2013), fits a smooth curve through the cumulative points. It better reflects the way carbon concentration usually declines with depth, which matters more when layers are thick or when you report several mass-based layers. The <code>hyman</code> method in R keeps the curve from decreasing, since cumulative carbon can only increase with depth. This is the same approach used in the ESM R script published by von Haden et al.&nbsp;(2020).</li>
+</ul>
+<p>With thin layers, like the 10 cm increments here, the two usually give similar results, as the two ESM columns in the table above show. With thick layers, or when the reference mass falls well inside a layer, the choice matters more.</p>
+</section>
+<section id="applying-esm-to-real-data" class="level2">
+<h2 class="anchored" data-anchor-id="applying-esm-to-real-data">Applying ESM to real data</h2>
+<p>Key points to consider when doing ESM calculations:</p>
+<ul>
+<li><strong>Measure bulk density every time you sample.</strong> ESM depends on the soil mass in each layer, so bulk density has to be measured at each sampling, for each layer. Assuming a fixed bulk density brings back the problem ESM is meant to solve.</li>
+<li><strong>Sample deeper than your target depth.</strong> If soil becomes less dense between samplings, the mass to 30 cm can fall below the reference mass, and there is no data to interpolate into. Sampling one extra layer below the reporting depth means the reference mass is always within the sampled profile. The function above stops with an error rather than extrapolating.</li>
+<li><strong>Choose the reference mass deliberately and report it.</strong> Common choices are the baseline mass, the mean mass across all samples, or the lowest mass observed. Using the lowest mass guarantees every sample reaches it. Whatever you choose, use the same reference mass for every comparison.</li>
+<li><strong>Use several sampled layers.</strong> Reporting carbon in more than one mass-based layer (for example, the masses equivalent to 0 to 15 cm and 15 to 30 cm) shows where in the profile the change occurred, which matters because practices like no-till concentrate carbon near the surface.</li>
+<li><strong>Account for coarse fragments and inorganic carbon.</strong> Bulk density and soil mass should be for the &lt;2 mm fraction, and on calcareous soils the carbon should be organic carbon, not total carbon.</li>
+</ul>
+<p>To apply the function to a full dataset, run it for every site and sampling time. The example below uses a small test dataset with three sites, each sampled at baseline and remeasurement in four 10 cm layers to 40 cm. Site A becomes denser, site B changes little, and site C becomes less dense, so its remeasured soil mass to 30 cm falls below the reference mass. Because every profile was sampled to 40 cm, the reference mass still falls within the sampled soil.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1">dat <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(</span>
+<span id="cb8-2">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">site   =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"A"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"B"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"C"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">8</span>),</span>
+<span id="cb8-3">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">time   =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"baseline"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"remeasure"</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">each =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">4</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3</span>),</span>
+<span id="cb8-4">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">top    =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>),     <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cm</span></span>
+<span id="cb8-5">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bottom =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">rep</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">40</span>), <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">6</span>),    <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cm</span></span>
+<span id="cb8-6">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">bd     =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.20</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.35</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.40</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.42</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.32</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.40</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.43</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.44</span>,   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># A: denser</span></span>
+<span id="cb8-7">             <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.05</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.25</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.33</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.38</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.07</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.26</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.34</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.38</span>,   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># B: little change</span></span>
+<span id="cb8-8">             <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.30</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.42</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.45</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.47</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.22</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.38</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.44</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.46</span>),  <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># C: less dense</span></span>
+<span id="cb8-9">  <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">soc    =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.6</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.7</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.7</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.6</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.8</span>,</span>
+<span id="cb8-10">             <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.4</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.3</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">3.6</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.1</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.3</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>,</span>
+<span id="cb8-11">             <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.9</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.2</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>,  <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2.0</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1.3</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.9</span>, <span class="fl" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">0.7</span>)</span>
+<span id="cb8-12">)</span>
+<span id="cb8-13">dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass      <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>bd <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> (dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>bottom <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>top) <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># soil mass, Mg/ha</span></span>
+<span id="cb8-14">dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">*</span> dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass                <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># SOC stock, Mg C/ha</span></span>
+<span id="cb8-15"></span>
+<span id="cb8-16">report_depth <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">30</span>   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># cm</span></span>
+<span id="cb8-17"></span>
+<span id="cb8-18"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Reference mass: baseline soil mass to the reporting depth, for each site</span></span>
+<span id="cb8-19">ref_by_site <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">aggregate</span>(mass <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">~</span> site,</span>
+<span id="cb8-20">                         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">data =</span> dat[dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"baseline"</span> <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&amp;</span> dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>bottom <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> report_depth, ],</span>
+<span id="cb8-21">                         <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">FUN =</span> sum)</span>
+<span id="cb8-22"></span>
+<span id="cb8-23">esm_results <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">do.call</span>(rbind, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">lapply</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">split</span>(dat, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">list</span>(dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>site, dat<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">drop =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">TRUE</span>), <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">function</span>(p) {</span>
+<span id="cb8-24">  p   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> p[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">order</span>(p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>top), ]                                   <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># layers from the surface down</span></span>
+<span id="cb8-25">  ref <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> ref_by_site<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass[ref_by_site<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>site <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">==</span> p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>site[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>]]</span>
+<span id="cb8-26">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">data.frame</span>(<span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">site        =</span> p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>site[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>],</span>
+<span id="cb8-27">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">time        =</span> p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time[<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>],</span>
+<span id="cb8-28">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">fixed_depth =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sum</span>(p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock[p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>bottom <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">&lt;=</span> report_depth]),</span>
+<span id="cb8-29">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">esm         =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">esm_stock</span>(p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>mass, p<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>soc_stock, ref, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"spline"</span>))</span>
+<span id="cb8-30">}))</span>
+<span id="cb8-31">esm_results <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> esm_results[<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">order</span>(esm_results<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>site, esm_results<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>time), ]</span>
+<span id="cb8-32"></span>
+<span id="cb8-33"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Change in SOC stock at each site</span></span>
+<span id="cb8-34">wide <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">reshape</span>(esm_results, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">idvar =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"site"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">timevar =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"time"</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">direction =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"wide"</span>)</span>
+<span id="cb8-35">wide<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>change_fixed <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> wide<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fixed_depth.remeasure <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> wide<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>fixed_depth.baseline</span>
+<span id="cb8-36">wide<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>change_esm   <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">&lt;-</span> wide<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>esm.remeasure <span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">-</span> wide<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">$</span>esm.baseline</span>
+<span id="cb8-37">knitr<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">kable</span>(wide[, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"site"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"change_fixed"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"change_esm"</span>)], <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">digits =</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">2</span>, <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">row.names =</span> <span class="cn" style="color: #8f5902;
+background-color: null;
+font-style: inherit;">FALSE</span>,</span>
+<span id="cb8-38">             <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">col.names =</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Site"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fixed-depth change (Mg C/ha)"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"ESM change (Mg C/ha)"</span>))</span></code></pre></div></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Site</th>
+<th style="text-align: right;">Fixed-depth change (Mg C/ha)</th>
+<th style="text-align: right;">ESM change (Mg C/ha)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">A</td>
+<td style="text-align: right;">4.22</td>
+<td style="text-align: right;">2.32</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">B</td>
+<td style="text-align: right;">3.16</td>
+<td style="text-align: right;">2.74</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">C</td>
+<td style="text-align: right;">0.51</td>
+<td style="text-align: right;">1.50</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>At site A, where the soil became denser, the fixed-depth comparison overstates the gain. At site C, where it became less dense, the fixed-depth comparison understates it. At site B, with little change in bulk density, the two methods are closer. Note that the reference mass and the fixed-depth stock both use only the layers to the reporting depth, even though the profiles were sampled deeper.</p>
+</section>
+<section id="further-resources" class="level2">
+<h2 class="anchored" data-anchor-id="further-resources">Further resources</h2>
+<p>For a more complete implementation, von Haden, Yang, and DeLucia published an R script alongside their 2020 paper: the <a href="https://github.com/cabbi-bio/ESM-R-script">ESM R script</a> from the Center for Advanced Bioenergy and Bioproducts Innovation (CABBI). It handles many cores and replicates at once, calculates stocks at several reference depths, and outputs both fixed-depth and ESM results.</p>
+</section>
+<section id="the-takeaway" class="level2">
+<h2 class="anchored" data-anchor-id="the-takeaway">The takeaway</h2>
+<p>A fixed depth is not a fixed amount of soil. When management changes bulk density, fixed-depth comparisons confuse changes in soil bulk density with changes in soil carbon, and can overstate or understate the change considerably. Comparing stocks on an equivalent soil mass basis removes that bias, and it takes only a few lines of code once bulk density is measured at each sampling.</p>
+<p>The ESM approach trades a reference depth for a reference mass. With fixed depth, the mass of soil compared varies; with ESM, the depth compared varies. That changes how the results need to be interpreted, and while ESM is not quite as intuitive as fixed depth, it minimizes the influence of varying bulk density values for carbon change over time assessments.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<p>Ellert, B.H., and Bettany, J.R. 1995. Calculation of organic matter and nutrients stored in soils under contrasting management regimes. <em>Canadian Journal of Soil Science</em>, 75(4): 529–538. <a href="https://doi.org/10.4141/cjss95-075">https://doi.org/10.4141/cjss95-075</a></p>
+<p>McConkey, B. 2019. <em>Prairie Soil Carbon Balance Project: Monitoring SOC Change Across Saskatchewan Farms from 1996 to 2018</em>. Phase 1 Report. Saskatchewan Soil Conservation Association. <a href="https://poga.ca/wp-content/uploads/2022/06/PSCB-Report-June-18-2019.pdf">PDF</a></p>
+<p>von Haden, A.C., Yang, W.H., and DeLucia, E.H. 2020. Soils’ dirty little secret: Depth-based comparisons can be inadequate for quantifying changes in soil organic carbon and other mineral soil properties. <em>Global Change Biology</em>, 26(7): 3759–3770. <a href="https://doi.org/10.1111/gcb.15124">https://doi.org/10.1111/gcb.15124</a></p>
+<p>Wendt, J.W., and Hauser, S. 2013. An equivalent soil mass procedure for monitoring soil organic carbon in multiple soil layers. <em>European Journal of Soil Science</em>, 64(1): 58–65. <a href="https://doi.org/10.1111/ejss.12002">https://doi.org/10.1111/ejss.12002</a></p>
+
+
+</section>
+
+ ]]></description>
+  <category>soil carbon</category>
+  <category>soil measurement</category>
+  <category>soil data</category>
+  <guid>https://yourdomain.com/posts/fixed-depth-vs-esm/</guid>
+  <pubDate>Fri, 13 Nov 2026 05:00:00 GMT</pubDate>
+  <media:content url="https://yourdomain.com/posts/fixed-depth-vs-esm/esm_cumulative.png" medium="image" type="image/png" height="99" width="144"/>
+</item>
 <item>
   <title>How Many Samples Does It Take to Map a Contaminated Soil Plume Accurately?</title>
   <dc:creator>Preston Sorenson</dc:creator>

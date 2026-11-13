@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/fixed-depth-vs-esm/index.html",
       "/posts/plume-sampling/index.html",
       "/posts/canola-seeding-dates/index.html",
       "/posts/detecting-soil-carbon-change/detecting-soil-carbon-change.html",
@@ -16,6 +17,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/fixed-depth-vs-esm/index.html",
       "/posts/plume-sampling/index.html",
       "/posts/canola-seeding-dates/index.html",
       "/posts/detecting-soil-carbon-change/detecting-soil-carbon-change.html",
